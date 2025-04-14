@@ -1,0 +1,23 @@
+#save-btn {
+  color: var(--cv-white);
+  border: none;
+  outline: none;
+  //   margin-right: 8px;
+  // padding: 0px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--cv-blue);
+}
+
+#save-btn:hover {
+  background-color: var(--cv-darkgrey);
+}
+
+.disabled {
+  color: var(--cv-lightgrey);
+}
+
+hr {
+  margin: 16px 32px;
+  color: var(--cv-grey);
+}
