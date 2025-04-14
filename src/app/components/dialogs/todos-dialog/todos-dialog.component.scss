@@ -1,0 +1,26 @@
+#new-todo-btn {
+  color: var(--cv-white);
+  border: none;
+  outline: none;
+  //   margin-right: 8px;
+  padding: 0px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--cv-blue);
+}
+
+#new-todo-btn:hover {
+  background-color: var(--cv-darkgrey);
+}
+
+new-todo-dialog {
+  z-index: 1000;
+}
+
+#header-row {
+  margin-bottom: 16px;
+}
+
+#size-wrapper {
+  width: 500px;
+}
