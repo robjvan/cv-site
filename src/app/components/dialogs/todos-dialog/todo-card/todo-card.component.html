@@ -1,0 +1,43 @@
+<div class="card my-1">
+  <div class="card-body">
+    <div class="d-flex flex-row align-items-start">
+      <!-- Title -->
+      <div class="card-title fw-bold">
+        {{ todo()!.title }}
+      </div>
+
+      <!-- Status badge -->
+      <div class="card-text ms-3">
+        <!-- <span class="badge"> -->
+        <span class="badge" [ngClass]="getColorClass()">
+          {{ status }}
+        </span>
+      </div>
+
+      <!-- Spacer -->
+      <div class="flex-fill"></div>
+
+      <!-- Edit button -->
+      <button class="blank me-2" aria-label="Edit todo button">
+        <i id="edit-btn" class="bi bi-pencil control-btn"></i>
+      </button>
+
+      <!-- Delete button -->
+      <button class="blank" aria-label="Delete todo button">
+        <i
+          id="delete-btn"
+          class="bi bi-trash control-btn"
+          (click)="deleteTodo()"
+        ></i>
+      </button>
+    </div>
+
+    <!-- Description -->
+    <div class="card-text">{{ todo()!.description }}</div>
+
+    <!-- Due Date -->
+    @if (dueDate) {
+    <div class="card-text fst-italic text-muted">Due {{ dueDate }}</div>
+    }
+  </div>
+</div>
