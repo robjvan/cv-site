@@ -61,39 +61,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   /** Stores the current dark mode state as a writable signal. */
   useDarkMode: WritableSignal<boolean | undefined> = signal(undefined);
 
-  initialAppState = {
-    showHomeDialog: false,
-    showAboutMeDialog: false,
-    showSkillsDialog: false,
-    showProjectsDialog: false,
-    showContactDialog: false,
-    showEducationDialog: false,
-
-    // "App" dialogs
-    showSearchApp: false,
-    showTodoApp: false,
-    showNotesApp: false,
-    show3dViewerApp: false,
-    showHelpDialog: false,
-    showAboutAppDialog: false,
-    showSettingsDialog: false,
-    showWeatherApp: false,
-
-    // Helper dialogs
-    showNewNoteDialog: false,
-    showEditNoteDialog: false,
-    showDeleteNoteDialog: false,
-    showNewTodoDialog: false,
-    showEditTodoDialog: false,
-    showDeleteTodoDialog: false,
-  };
-
-  openApps = signal<IOpenApps>(this.initialAppState);
+  openApps = signal<IOpenApps | undefined>(undefined);
 
   highestZIndex = 100;
 
   // Structure to store z-index values by window type
-  windowZIndices = new Map<string, number>([
+  private windowZIndices = new Map<string, number>([
     ['home', 100],
     ['about', 101],
     ['help', 102],
@@ -113,6 +86,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Subscribes to the theme service to update background styles dynamically.
    */
   ngOnInit(): void {
+    this.openApps.set(this.launcherService.initialAppState);
+
     this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (openApps: IOpenApps) => this.openApps.set(openApps),
       error: (err: any) => console.log(err.message),
@@ -139,7 +114,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   getDialogState(dialogKey: keyof IOpenApps): boolean {
-    return this.openApps()[dialogKey];
+    return this.openApps()![dialogKey];
   }
 
   bringToFront(windowName: string) {
