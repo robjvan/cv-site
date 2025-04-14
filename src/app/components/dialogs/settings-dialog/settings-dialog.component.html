@@ -1,0 +1,69 @@
+<dialog-window class="pane" title="Settings" type="settings">
+  <!-- <h1 class="display-6">Settings</h1> -->
+
+  <!-- Show seconds button row -->
+  <div class="display-flex flex-row row">
+    <div class="col align-content-center">
+      <span>Show seconds in clock</span>
+    </div>
+
+    <!-- Toggle seconds button  -->
+    <div class="col">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="secondsBtn"
+        (click)="toggleSeconds()"
+      >
+        {{ secondsBtnLabel }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Show dynamic background row -->
+  <!-- <div class="display-flex flex-row row">
+    <div class="col align-content-center">
+      <span>Show dynamic background</span>
+    </div> -->
+
+  <!-- Toggle dynamic background button  -->
+  <!-- <div class="col">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="dynamnicBgBtn"
+        (click)="toggleDynamicBg()"
+      >
+        {{ dynamicBgBtnLabel }}
+      </button>
+    </div> -->
+  <!-- </div> -->
+  <!-- Show toggle dark mode row -->
+  <!-- <div class="display-flex flex-row row">
+    <div class="col align-content-center">
+      <span>Use dark mode</span>
+    </div> -->
+
+  <!-- Toggle dark mode button  -->
+  <!-- <div class="col">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="darkModeBtn"
+        (click)="toggleDarkMode()"
+      >
+        {{ darkModeBtnLabel }}
+      </button>
+    </div>
+  </div> -->
+
+  <!-- Close dialog button -->
+  <!-- <button
+    id="close-button"
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="closeDialog()"
+  >
+    Close
+  </button> -->
+</dialog-window>
