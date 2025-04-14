@@ -1,0 +1,25 @@
+<dialog-window class="pane" title="About Me" type="about-me">
+  <div class="flex-fill d-flex flex-column align-items-center p-3">
+    <!-- Avatar header -->
+    <div class="blurb">
+      <img id="avatar" src="/images/avatar.jpg" />
+      <h1>Rob Vandelinder</h1>
+      <p id="titleBlurb">Turning ideas into reality</p>
+    </div>
+
+    <!-- Info Blurb -->
+    <div class="blurb2">
+      <p class="intro">
+        <span>Welcome to my portfolio!</span> I’m a passionate Full Stack
+        Developer specializing in creating robust web and mobile applications
+        along with innovative user experiences. This site is a showcase of my
+        skills, projects, and the journey I’ve taken as a developer.
+      </p>
+      <p class="intro" style="font-style: italic">
+        Start exploring to see how I can contribute to your team!
+      </p>
+    </div>
+
+    <button id="cvButton" type="button" (click)="serveCV()">Download CV</button>
+  </div>
+</dialog-window>

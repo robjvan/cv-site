@@ -1,0 +1,91 @@
+.blurb {
+  padding: 16px 32px 8px;
+  transition: all 0.2s ease-in-out;
+  max-width: 1200px;
+}
+
+h1 {
+  margin: 0;
+  color: var(--cv-blue);
+  font-family: var(--serif);
+  font-weight: bold;
+  font-size: 3.5rem;
+  text-align: center;
+  margin-top: 32px;
+}
+
+#titleBlurb {
+  margin-top: 0;
+  color: var(--cv-black);
+  font-family: var(--title-blurb-font);
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
+#avatar {
+  height: var(--avatar-size);
+  border-radius: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+}
+
+.blurb2 {
+  padding: 24px 32px 8px;
+  margin: 32px;
+  max-width: 1200px;
+  transition: 0.25s ease;
+}
+
+.intro {
+  color: var(--cv-black);
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+span {
+  font-weight: bold;
+}
+
+avatar-header {
+  max-width: 600px;
+}
+
+#cvButton {
+  padding: 12px 18px;
+  margin-top: 16px;
+  font-size: 1.25rem;
+  color: white;
+  background-color: var(--cv-blue);
+  border: none;
+  border-radius: 10px;
+  transition: 0.25s ease;
+  cursor: pointer;
+  animation: bounceBtn 1.5s 1 ease-in-out;
+  animation-iteration-count: infinite;
+  width: 200px;
+}
+
+#cvButton:hover {
+  background-color: var(--cv-darkgrey);
+  color: var(--cv-white);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.6),
+    0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+#cvButton:focus {
+  transform: scale(0.98);
+}
+
+@keyframes bounceBtn {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.03;
+  }
+  100% {
+    scale: 1;
+  }
+}
