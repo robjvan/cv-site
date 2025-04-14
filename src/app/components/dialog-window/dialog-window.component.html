@@ -1,0 +1,13 @@
+<div class="window" id="window" cdkDrag>
+  <div class="window-header d-flex flex-row">
+    <span>{{ title() }}</span>
+    <div class="flex-fill"></div>
+    <div class="close-btn">
+      <i class="bi bi-x" (click)="closeDialog()"></i>
+    </div>
+  </div>
+  <div class="window-content p-3" style="padding: 10px">
+    <!-- Content goes here -->
+    <ng-content></ng-content>
+  </div>
+</div>
