@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+  // z-index: 1;
+}
+
+#bg {
+  z-index: 2;
+}
+
+.flex-fill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+img {
+  width: 100vw;
+  height: 98vh;
+  object-fit: cover;
+}
+
+.hideImg {
+  img {
+    opacity: 0;
+  }
+}
+
+#bg-img {
+  height: 100%;
+  max-width: 100vw;
+}
