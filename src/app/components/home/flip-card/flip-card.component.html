@@ -1,0 +1,15 @@
+<div class="flip-card">
+  <!-- <div class="flip-card" (click)="handleCardClick()"> -->
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="card-content">
+        <img src="{{ imgSrc }}" alt="Avatar">
+        <p id="title">{{ title }}</p>
+      </div>
+    </div>
+    <div class="flip-card-back">
+      <p id="blurb">{{ blurb }}</p>
+      <button type="button" class="navButton" (click)="handleCardClick()">See More</button>
+    </div>
+  </div>
+</div>
