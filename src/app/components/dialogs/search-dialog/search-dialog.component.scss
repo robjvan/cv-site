@@ -1,0 +1,57 @@
+.provider-btn {
+  text-align: center;
+}
+
+.active {
+  img {
+    filter: saturate(1) !important;
+    transition: all 0.15s ease-in-out;
+    height: 56px;
+  }
+
+  .btn-label {
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+  }
+}
+
+#submit-btn {
+  margin-top: 32px;
+  background-color: var(--cv-blue);
+  border: none;
+  outline: 1px solid var(--cv-blue);
+  width: 64px;
+  font-size: 1.25rem;
+}
+
+#submit-btn:hover {
+  background-color: var(--cv-darkgrey);
+  outline: 1px solid var(--cv-darkgrey);
+}
+
+img {
+  height: 32px;
+  margin-bottom: 8px;
+  filter: saturate(0);
+  transition: all 0.15s ease-in-out;
+}
+
+#clear-btn {
+  margin: auto;
+  margin-left: 8px;
+  border: 1px solid var(--cv-grey);
+  color: var(--cv-grey);
+  border-radius: 50%;
+  padding: 0px 4px;
+}
+
+#clear-btn:hover {
+  background-color: var(--cv-grey);
+  border: none;
+  color: var(--cv-white);
+}
+
+#size-wrapper {
+  width: 600px;
+  max-width: 600px;
+}

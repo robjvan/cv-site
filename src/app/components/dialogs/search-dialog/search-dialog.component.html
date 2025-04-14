@@ -1,0 +1,93 @@
+<dialog-window class="pane" title="Universal Search" type="search">
+  <div id="size-wrapper"></div>
+  <form (ngSubmit)="launchSearch()">
+    <!-- Search Term Text Input -->
+    <label class="form-label center" for="query">
+      <span>Enter search term:</span>
+    </label>
+
+    <div class="d-flex flex-row">
+      <div class="flex-fill"></div>
+      <div>
+        <input
+          class="form-control center"
+          type="text"
+          name="query"
+          id="query"
+          [(ngModel)]="searchTerm"
+        />
+      </div>
+      <i class="bi bi-x" id="clear-btn" (click)="clearSearchTerm()"></i>
+      <div class="flex-fill"></div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="my-3"></div>
+
+    <!-- Search provider selector -->
+    <label for="provider-picker" class="form-label center">
+      <span>Choose search provider:</span>
+    </label>
+    <!-- Spacer -->
+    <div class="my-3"></div>
+    <div class="d-flex flex-row">
+      <!-- Filler to take unused space -->
+      <div class="flex-fill"></div>
+
+      <!-- Select Amazon button -->
+      <div
+        class="vstack col provider-btn"
+        id="amazon-btn"
+        (click)="selectProvider('amazon')"
+      >
+        <img src="/images/logos/amazon.svg" alt="Google logo" />
+        <span class="btn-label">Amazon</span>
+      </div>
+
+      <!-- Select Google button -->
+      <div
+        class="vstack col provider-btn"
+        id="google-btn"
+        (click)="selectProvider('google')"
+      >
+        <img src="/images/logos/google_g.svg" alt="Google logo" />
+        <span class="btn-label">Google</span>
+      </div>
+
+      <!-- Select Youtube button -->
+      <div
+        class="vstack col provider-btn"
+        id="youtube-btn"
+        (click)="selectProvider('youtube')"
+      >
+        <img src="/images/logos/youtube.svg" alt="Youtube logo" />
+        <span class="btn-label">Youtube</span>
+      </div>
+
+      <!-- Select Stack Overflow button -->
+      <div
+        class="vstack col provider-btn"
+        id="stack-btn"
+        (click)="selectProvider('stack_overflow')"
+      >
+        <img src="/images/logos/stack_overflow.svg" alt="Stack Overflow logo" />
+        <span class="btn-label">Stack Overflow</span>
+      </div>
+
+      <!-- Select Wikipedia button -->
+      <div
+        class="vstack col provider-btn"
+        id="wikipedia-btn"
+        (click)="selectProvider('wikipedia')"
+      >
+        <img src="/images/logos/wikipedia.svg" alt="Wikipedia logo" />
+        <span class="btn-label">Wikipedia</span>
+      </div>
+      <!-- Filler to take unused space -->
+      <div class="flex-fill"></div>
+    </div>
+    <button type="submit" class="btn btn-dark center" id="submit-btn">
+      <span> Go </span>
+    </button>
+  </form>
+</dialog-window>
