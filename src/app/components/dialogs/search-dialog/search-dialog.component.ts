@@ -1,7 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
-import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
-import { LauncherService } from '../../../services/launcher.service';
 import { SearchProvider } from '../../../models/enums/search-provider.enum';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -51,7 +49,7 @@ export class SearchDialogComponent implements OnInit {
    *
    * @param {string} key New search provider token, used to set the new provider.
    */
-  selectProvider(key: string): void {
+  public selectProvider(key: string): void {
     // Find all search provider buttons.
     const allBtns = document.querySelectorAll('.provider-btn');
 
@@ -71,7 +69,7 @@ export class SearchDialogComponent implements OnInit {
   }
 
   /** Calls the search service to launch a search using the selected provider and entered search term. */
-  launchSearch(): void {
+  public launchSearch(): void {
     if (this.searchTerm() !== '') {
       this.searchService.launchSearch(
         this.selectedProvider(),
@@ -81,7 +79,7 @@ export class SearchDialogComponent implements OnInit {
   }
 
   /** Clears any entered text in the input field. */
-  clearSearchTerm(): void {
+  public clearSearchTerm(): void {
     if (this.searchTerm() !== '') {
       this.searchTerm.set('');
     }

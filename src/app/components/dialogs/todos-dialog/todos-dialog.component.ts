@@ -35,14 +35,14 @@ export class TodosDialogComponent implements OnInit {
   /** Writable signal to store a list of the user's todo objects.
    * This is kept reactive to reflect real-time UI updates.
    */
-  todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
+  public todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
 
   /** Writable signal to store the current state of open dialogs.
    * This is kept reactive to reflect real-time UI updates.
    */
-  openDialogs: WritableSignal<Partial<IOpenApps>> = signal<Partial<IOpenApps>>(
-    this.initialState
-  );
+  private openDialogs: WritableSignal<Partial<IOpenApps>> = signal<
+    Partial<IOpenApps>
+  >(this.initialState);
 
   /** Constructor injects required services.
    *
@@ -57,7 +57,7 @@ export class TodosDialogComponent implements OnInit {
   /** Angular lifecycle hook.
    * Subscribes to todo and open apps streams  on initialization to keep UI in sync.
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.todosService.reloadTodos();
 
     // Fetch the list of todo objects.
@@ -79,12 +79,15 @@ export class TodosDialogComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
+  /** Angular lifecycle hook.
+   * Cleans up any subscriptions to avoid memory leaks.
+   */
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  openDialog(type: string): void {
+  public openDialog(type: string): void {
     // Use a map to determine which dialog to open
     const dialogMap: Record<string, DialogPurpose> = {
       newTodo: DialogPurpose.NEW_TODO,
@@ -95,7 +98,7 @@ export class TodosDialogComponent implements OnInit {
     this.launcherService.showDialog(dialogMap[type]);
   }
 
-  getDialogState(dialogKey: keyof IOpenApps): boolean {
+  public getDialogState(dialogKey: keyof IOpenApps): boolean {
     return this.openDialogs()[dialogKey] ?? false;
   }
 }

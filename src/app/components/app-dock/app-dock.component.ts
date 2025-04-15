@@ -24,22 +24,22 @@ export class AppDockComponent implements OnInit {
   /** Writable signal to store the current state of open apps.
    * This is kept reactive to reflect real-time UI updates.
    */
-  openApps: WritableSignal<IOpenApps | undefined> = signal(undefined);
+  public openApps: WritableSignal<IOpenApps | undefined> = signal(undefined);
 
   /** Array of personal info dialog buttons.
    * Each item includes a tooltip, icon class, and an action callback to trigger dialog.
    */
-  dialogLinks: IDialogLink[] = [];
+  public dialogLinks: IDialogLink[] = [];
 
   /** Array of app shortcut buttons.
    * These are interactive tools or utilities the user can open.
    */
-  appLinks: IDialogLink[] = [];
+  public appLinks: IDialogLink[] = [];
 
   /** Home button configuration.
    * Navigates the user to the root (home) route.
    */
-  homeBtn: IDialogLink = {
+  public homeBtn: IDialogLink = {
     tooltip: 'Close All',
     action: () => this.closeAllDialogs(),
     class: 'bi bi-house',
@@ -49,7 +49,7 @@ export class AppDockComponent implements OnInit {
   /** Settings button configuration.
    * Opens the settings dialog via route navigation.
    */
-  settingsBtn: IDialogLink = {
+  public settingsBtn: IDialogLink = {
     tooltip: 'Settings',
     action: () => this.openDialog(DialogPurpose.SETTINGS),
     class: 'bi bi-gear',
@@ -69,7 +69,7 @@ export class AppDockComponent implements OnInit {
   /** Angular lifecycle hook.
    * Subscribes to open apps stream on initialization to keep UI in sync.
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (val: IOpenApps) => {
         // Update the signal with latest open apps
@@ -82,7 +82,10 @@ export class AppDockComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
+  /** Angular lifecycle hook.
+   * Cleans up any subscriptions to avoid memory leaks.
+   */
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -91,16 +94,16 @@ export class AppDockComponent implements OnInit {
    *
    * @param {DialogPurpose} target DialogPurpose enum indicating which dialog to open.
    */
-  openDialog(target: DialogPurpose) {
+  public openDialog(target: DialogPurpose) {
     this.launcherService.showDialog(target);
   }
 
   /** Close all open dialogs to show the home page. */
-  closeAllDialogs(): void {
+  public closeAllDialogs(): void {
     this.launcherService.closeAllDialogs();
   }
 
-  populateLinks(data: IOpenApps): void {
+  private populateLinks(data: IOpenApps): void {
     // Populate the info about me sections
     this.dialogLinks = [
       {

@@ -5,10 +5,11 @@ import { interval, Subject, Subscription, takeUntil } from 'rxjs';
 import { SettingsService } from '../../services/settings.service';
 import { LauncherService } from '../../services/launcher.service';
 import { DialogPurpose } from '../../models/enums/dialog-purpose.enum';
+import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
 
 @Component({
   selector: 'cupertino-bar',
-  imports: [NgbModule, NgbTooltipModule],
+  imports: [NgbModule, NgbTooltipModule, WeatherWidgetComponent],
   templateUrl: './cupertino-bar.component.html',
   styleUrl: './cupertino-bar.component.scss',
 })
@@ -16,8 +17,9 @@ export class CupertinoBarComponent {
   private destroy$ = new Subject<void>();
   private subscription!: Subscription;
 
-  time = signal<string | undefined>(undefined);
-  showSeconds = false;
+  public time = signal<string | undefined>(undefined);
+  public showSeconds = false;
+  public showWeather = true;
 
   constructor(
     private readonly settingsService: SettingsService,
@@ -29,10 +31,14 @@ export class CupertinoBarComponent {
     help: DialogPurpose.HELP,
   };
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.time.set(moment().format('ddd MMM D h:mm A'));
     this.settingsService.showSeconds$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (showSeconds: boolean) => (this.showSeconds = showSeconds),
+      error: (err: any) => console.log(err.message),
+    });
+    this.settingsService.showWeather$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (showWeather: boolean) => (this.showWeather = showWeather),
       error: (err: any) => console.log(err.message),
     });
 
@@ -47,13 +53,13 @@ export class CupertinoBarComponent {
       });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.subscription.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  showDialog(key: string) {
+  public showDialog(key: string) {
     const dialogPurpose = this.dialogMap[key];
 
     if (dialogPurpose !== undefined) {

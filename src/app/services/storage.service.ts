@@ -34,7 +34,7 @@ export class StorageService {
    *
    * @returns {INote[]} The list of note objects that were  retrieved from local storage.
    */
-  loadNotes(): INote[] {
+  public loadNotes(): INote[] {
     return this.loadFromStorage<INote>('notes');
   }
 
@@ -42,7 +42,7 @@ export class StorageService {
    *
    * @param {INote[]} notes The list of note objects to be saved.
    */
-  saveNotes(notes: INote[]): void {
+  public saveNotes(notes: INote[]): void {
     this.saveToStorage<INote>('notes', notes);
   }
 
@@ -52,7 +52,7 @@ export class StorageService {
    *
    * @returns {ITodo[]} The list of todo objects that were retrieved from local storage.
    */
-  loadTodos(): ITodo[] {
+  public loadTodos(): ITodo[] {
     return this.loadFromStorage<ITodo>('todos');
   }
 
@@ -60,7 +60,7 @@ export class StorageService {
    *
    * @param {ITodo[]} todos The list of todo objects to be saved.
    */
-  saveTodos(todos: ITodo[]): void {
+  public saveTodos(todos: ITodo[]): void {
     this.saveToStorage<ITodo>('todos', todos);
   }
 }

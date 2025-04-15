@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
 import { FormsModule } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
@@ -33,7 +33,7 @@ export class NewTodoDialogComponent {
   };
 
   /** Calls the todos service to save a new todo to local storage. */
-  saveTodo(): void {
+  public saveTodo(): void {
     try {
       if (this.title() !== '' || this.description() !== '') {
         // Send a request to our notes service to save the todo.
@@ -59,7 +59,7 @@ export class NewTodoDialogComponent {
   }
 
   /** Resets our signals for the next new todo. */
-  clearForm(): void {
+  public clearForm(): void {
     this.title.set('');
     this.description.set('');
     this.dueDate.set('');
@@ -67,14 +67,14 @@ export class NewTodoDialogComponent {
   }
 
   /** Clears the status field when the toggle is unchecked */
-  handleStatusChecked(): void {
+  public handleStatusChecked(): void {
     if (!this.trackStatus()) {
       this.status.set('');
     }
   }
 
   /** Clears the due date field when the toggle is unchecked */
-  handleDueDateChecked(): void {
+  public handleDueDateChecked(): void {
     if (!this.hasDueDate()) {
       this.dueDate.set('mm/dd/yyyy');
     }

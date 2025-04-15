@@ -12,12 +12,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './todo-card.component.scss',
 })
 export class TodoCardComponent {
-  todo = input<ITodo | undefined>(undefined);
+  public todo = input<ITodo | undefined>(undefined);
+
   constructor(private readonly todosService: TodoService) {}
 
-  editTodo() {}
+  public editTodo() {}
 
-  deleteTodo() {
+  public deleteTodo() {
     this.todosService.deleteTodo(this.todo()!.id);
   }
 
@@ -35,11 +36,11 @@ export class TodoCardComponent {
     },
   };
 
-  get status(): string {
+  public get status(): string {
     return this.statusMap[this.todo()!.status].status;
   }
 
-  get dueDate(): string | null {
+  public get dueDate(): string | null {
     if (this.todo()?.dueDate) {
       return moment(this.todo()?.dueDate).format('dddd MMMM Do');
     } else {
@@ -47,7 +48,7 @@ export class TodoCardComponent {
     }
   }
 
-  getColorClass(): string {
+  public get getColorClass(): string {
     return this.statusMap[this.todo()!.status].colorClass;
   }
 }

@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-note-dialog.component.scss',
 })
 export class NewNoteDialogComponent {
-  title = signal<string>('');
-  body = signal<string>('');
+  public title = signal<string>('');
+  public body = signal<string>('');
 
   constructor(
     private readonly notesService: NotesService,
@@ -21,7 +21,7 @@ export class NewNoteDialogComponent {
   ) {}
 
   /** Calls the notes service to save a new note to local storage. */
-  saveNote(): void {
+  public saveNote(): void {
     try {
       if (this.title() !== '' || this.body() !== '') {
         // Send a request to our notes service to save the note.

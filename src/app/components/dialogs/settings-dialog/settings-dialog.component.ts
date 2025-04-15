@@ -3,7 +3,7 @@ import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
 import { SettingsService } from '../../../services/settings.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'settings-dialog',
@@ -18,27 +18,28 @@ export class SettingsDialogComponent {
     private readonly settingsService: SettingsService
   ) {}
 
-  showSeconds = signal<boolean>(false);
-  // useDarkMode = signal<boolean>(false);
-  useDynamicBg = signal<boolean>(false);
+  public showSeconds = signal<boolean>(false);
+  // public useDarkMode = signal<boolean>(false);
+  public useDynamicBg = signal<boolean>(false);
+  public showWeather = signal<boolean>(false);
 
-  closeDialog() {
+  public closeDialog() {
     this.launcherService.closeDialog(DialogPurpose.SETTINGS);
   }
 
-  get secondsBtnLabel() {
+  public get secondsBtnLabel() {
     return this.showSeconds() === true ? 'ON' : 'OFF';
   }
-
-  // get dynamicBgBtnLabel() {
-  //   return this.useDynamicBg() === true ? 'ON' : 'OFF';
-  // }
 
   // get darkModeBtnLabel() {
   //   return this.useDarkMode() === true ? 'ON' : 'OFF';
   // }
 
-  ngOnInit() {
+  get showWeatherBtnLabel() {
+    return this.showWeather() === true ? 'ON' : 'OFF';
+  }
+
+  public ngOnInit() {
     // Set the color and status of the 'toggle seconds button'
     this.settingsService.showSeconds$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (showSeconds: boolean) => {
@@ -54,14 +55,34 @@ export class SettingsDialogComponent {
       },
       error: (err: any) => console.log(err.message),
     });
+
+    // Set the color and status of the 'show weather button'
+    this.settingsService.showWeather$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (showWeather: boolean) => {
+        const btn = document.querySelector('#showWeatherBtn');
+        if (showWeather) {
+          btn?.classList.remove('btn-outline-dark');
+          btn?.classList.add('btn-dark');
+        } else {
+          btn?.classList.remove('btn-dark');
+          btn?.classList.add('btn-outline-dark');
+        }
+        this.showWeather.set(showWeather);
+      },
+      error: (err: any) => console.log(err.message),
+    });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  toggleSeconds(): void {
+  public toggleSeconds(): void {
     this.settingsService.toggleSeconds();
+  }
+
+  public toggleWeather(): void {
+    this.settingsService.toggleShowWeather();
   }
 }

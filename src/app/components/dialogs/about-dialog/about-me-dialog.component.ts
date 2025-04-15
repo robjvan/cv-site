@@ -19,9 +19,8 @@ export class AboutDialogComponent {
     this.launcherService.closeDialog(DialogPurpose.ABOUT_ME);
   }
 
-  /** Triggers the download of a CV PDF file by creating and clicking an anchor tag dynamically.
-   */
-  serveCV(): void {
+  /** Triggers the download of a CV PDF file by creating and clicking an anchor tag dynamically. */
+  public serveCV(): void {
     const link = this.renderer.createElement('a');
     link.setAttribute('target', '_blank');
     link.setAttribute('href', '/docs/rv_cv.pdf');

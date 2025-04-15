@@ -12,7 +12,7 @@ import { LauncherService } from '../../../services/launcher.service';
 export class ProjectsDialogComponent {
   constructor(private readonly launcherService: LauncherService) {}
 
-  closeDialog() {
+  public closeDialog() {
     this.launcherService.closeDialog(DialogPurpose.PROJECTS);
   }
 }

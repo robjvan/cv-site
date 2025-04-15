@@ -10,17 +10,17 @@ import { NotesService } from '../../../../services/notes.service';
   styleUrl: './note-card.component.scss',
 })
 export class NoteCardComponent {
-  note = input<INote | undefined>(undefined);
+  public note = input<INote | undefined>(undefined);
 
   constructor(private readonly notesService: NotesService) {}
 
-  createdTime(createdAt: string) {
+  public createdTime(createdAt: string) {
     return moment(createdAt).format('MMM D h:mm A');
   }
 
-  editNote() {}
+  public editNote() {}
 
-  deleteNote() {
+  public deleteNote() {
     this.notesService.deleteNote(this.note()!.id);
   }
 }

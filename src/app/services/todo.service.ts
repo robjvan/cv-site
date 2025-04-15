@@ -13,13 +13,13 @@ import { TodoStatus } from '../models/enums/todo-status.enum';
 export class TodoService {
   constructor(private readonly storageService: StorageService) {}
 
-  todos$ = new BehaviorSubject<ITodo[]>([]);
+  public todos$ = new BehaviorSubject<ITodo[]>([]);
 
-  reloadTodos(): void {
+  public reloadTodos(): void {
     this.todos$.next(this.storageService.loadTodos());
   }
 
-  createTodo(todo: NewTodoDto): void {
+  public createTodo(todo: NewTodoDto): void {
     try {
       const newTodo: ITodo = {
         id: uuidv4(),
@@ -43,7 +43,7 @@ export class TodoService {
     }
   }
 
-  updateTodo(id: string, newData: Partial<NewTodoDto>): void {
+  public updateTodo(id: string, newData: Partial<NewTodoDto>): void {
     try {
       console.log(id, newData);
       // TODO(RV): Add logic
@@ -52,7 +52,7 @@ export class TodoService {
     }
   }
 
-  deleteTodo(id: string): void {
+  public deleteTodo(id: string): void {
     try {
       this.todos$.pipe(take(1)).subscribe({
         next: (todos: ITodo[]) => {

@@ -26,21 +26,21 @@ import { Subject, takeUntil } from 'rxjs';
 export class NotesDialogComponent implements OnInit {
   private destroy$ = new Subject<void>();
 
-  initialState = {
+  private initialState = {
     showNewNoteDialog: false,
     showEditNoteDialog: false,
     showDeleteNoteDialog: false,
   };
 
-  notes = signal<INote[]>([]);
-  openApps = signal<Partial<IOpenApps>>(this.initialState);
+  public notes = signal<INote[]>([]);
+  public openApps = signal<Partial<IOpenApps>>(this.initialState);
 
   constructor(
     private readonly launcherService: LauncherService,
     private readonly notesService: NotesService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.notesService.reloadNotes();
 
     this.notesService.notes$.pipe(takeUntil(this.destroy$)).subscribe({
@@ -59,12 +59,12 @@ export class NotesDialogComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  openDialog(type: string): void {
+  public openDialog(type: string): void {
     // Use a map to determine which dialog to open
     const dialogMap: Record<string, DialogPurpose> = {
       newNote: DialogPurpose.NEW_NOTE,
@@ -75,7 +75,7 @@ export class NotesDialogComponent implements OnInit {
     this.launcherService.showDialog(dialogMap[type]);
   }
 
-  getDialogState(dialogKey: keyof IOpenApps): boolean {
+  public getDialogState(dialogKey: keyof IOpenApps): boolean {
     return this.openApps()[dialogKey] ?? false;
   }
 }

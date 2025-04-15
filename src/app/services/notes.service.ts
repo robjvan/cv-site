@@ -4,8 +4,6 @@ import { BehaviorSubject, take } from 'rxjs';
 import { INote } from '../models/note.interface';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
-import { LauncherService } from './launcher.service';
-import { DialogPurpose } from '../models/enums/dialog-purpose.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +11,13 @@ import { DialogPurpose } from '../models/enums/dialog-purpose.enum';
 export class NotesService {
   constructor(private readonly storageService: StorageService) {}
 
-  notes$ = new BehaviorSubject<INote[]>([]);
+  public notes$ = new BehaviorSubject<INote[]>([]);
 
-  reloadNotes() {
+  public reloadNotes() {
     this.notes$.next(this.storageService.loadNotes());
   }
 
-  createNote(title?: string, description?: string) {
+  public createNote(title?: string, description?: string) {
     const newNote: INote = {
       id: uuidv4(),
       description: description ?? '',
@@ -38,7 +36,7 @@ export class NotesService {
     });
   }
 
-  deleteNote(id: string): void {
+  public deleteNote(id: string): void {
     try {
       this.notes$.pipe(take(1)).subscribe({
         next: (notes: INote[]) => {
@@ -54,7 +52,7 @@ export class NotesService {
     }
   }
 
-  updateNote(id: string, title?: string, description?: string) {}
+  public updateNote(id: string, title?: string, description?: string) {}
 
-  archiveNote(id: string) {}
+  public archiveNote(id: string) {}
 }
