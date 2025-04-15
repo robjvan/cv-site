@@ -2,9 +2,6 @@
   id="bg"
   class="h-100 w-100 d-flex flex-column justify-content-center align-items-center"
 >
-  <!-- <div id="bg-img"> -->
-  <!-- <img src="https://placecats.com/3440/1440" alt="Background image" /> -->
-
   <!-- App dialogs -->
   @if (getDialogState('showAboutAppDialog')) {
   <!-- About app dialog -->
@@ -82,13 +79,4 @@
     [style.z-index]="getZIndex('education')"
   ></education-dialog>
   }
-
-  <!-- Helper dialogs -->
-  <!-- @if (showNewNoteDialog) {
-  <new-note-dialog
-    (mousedown)="bringToFront('weather')"
-    [style.z-index]="getZIndex('weather')"
-  ></new-note-dialog>
-  } -->
-  <!-- </div> -->
 </section>
