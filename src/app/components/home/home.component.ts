@@ -21,7 +21,9 @@ import { HelpDialogComponent } from '../dialogs/help-dialog/help-dialog.componen
 import { AboutAppDialogComponent } from '../dialogs/about-app-dialog/about-app-dialog.component';
 import { WeatherDialogComponent } from '../dialogs/weather-dialog/weather-dialog.component';
 import { SettingsService } from '../../services/settings.service';
-import { Subject, takeUntil } from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
+import { LocationService } from '../../services/location.service';
+import { WeatherService } from '../../services/weather.service';
 
 declare var VANTA: any;
 
@@ -55,6 +57,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
    */
   constructor(
     private readonly launcherService: LauncherService,
+    private readonly locationService: LocationService,
+    private readonly weatherService: WeatherService,
     private readonly settingsService: SettingsService
   ) {}
 
@@ -91,6 +95,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (openApps: IOpenApps) => this.openApps.set(openApps),
       error: (err: any) => console.log(err.message),
+    });
+
+    // Handle user location
+    this.locationService.location$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((val) => val === undefined)
+      )
+      .subscribe(() => {
+        this.locationService.getUserLocation();
+      });
+
+    // Handle weather data
+    this.weatherService.forecastData$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (data) => {
+        if (!data) {
+          this.weatherService.fetchWeatherData();
+        }
+      },
+      error: (err) =>
+        console.error('[WeatherDialogComponent] Forecast error:', err.message),
     });
   }
 
