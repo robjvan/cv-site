@@ -8,12 +8,12 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { IForecastData } from '../models/forecast-data.interface';
 import { apiUrl, apiKey } from '../constants';
 import { LocationService } from './location.service';
 import { IUserLocation } from '../models/user-location.interface';
 
 import { HttpClient } from '@angular/common/http';
+import { IForecastData } from '../models/weather-data/forecast-data.interface';
 @Injectable({
   providedIn: 'root',
 })
