@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { SearchProvider } from '../models/enums/search-provider.enum';
 
 @Injectable({
@@ -8,32 +8,33 @@ import { SearchProvider } from '../models/enums/search-provider.enum';
 export class SearchService {
   constructor() {}
 
-  provider = new BehaviorSubject<SearchProvider>(SearchProvider.GOOGLE);
+  public provider = new BehaviorSubject<SearchProvider>(SearchProvider.GOOGLE);
 
-  setProvider(provider: SearchProvider) {
+  public setProvider(provider: SearchProvider) {
     this.provider.next(provider);
   }
 
-  launchSearch(provider: SearchProvider, query: string) {
-    switch (provider) {
-      case SearchProvider.GOOGLE:
-        window.open(`https://www.google.com/search?q=${query}`, '_blank');
-        break;
-      case SearchProvider.AMAZON:
-        window.open(`https://www.amazon.ca/s?k=${query}`, '_blank');
-        break;
-      case SearchProvider.STACK_OVERFLOW:
-        window.open(`https://stackoverflow.com/search?q${query}`, '_blank');
-        break;
-      case SearchProvider.YOUTUBE:
-        window.open(
-          `https://www.youtube.com/results?search_query=${query}`,
-          '_blank'
-        );
-        break;
-      case SearchProvider.WIKIPEDIA:
-        window.open(`https://en.wikipedia.org/wiki/${query}`, '_blank');
-        break;
+  private readonly searchUrlMap: Record<
+    SearchProvider,
+    (query: string) => string
+  > = {
+    [SearchProvider.GOOGLE]: (query) =>
+      `https://www.google.com/search?q=${query}`,
+    [SearchProvider.AMAZON]: (query) => `https://www.amazon.ca/s?k=${query}`,
+    [SearchProvider.STACK_OVERFLOW]: (query) =>
+      `https://stackoverflow.com/search?q${query}`,
+    [SearchProvider.YOUTUBE]: (query) =>
+      `https://www.youtube.com/results?search_query=${query}`,
+    [SearchProvider.WIKIPEDIA]: (query) =>
+      `https://en.wikipedia.org/wiki/${query}`,
+  };
+
+  public launchSearch(provider: SearchProvider, query: string) {
+    const url = this.searchUrlMap[provider];
+
+    if (url) {
+      const encodedQuery = encodeURIComponent(query);
+      window.open(url(encodedQuery), '_blank');
     }
   }
 }
