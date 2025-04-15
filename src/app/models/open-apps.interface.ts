@@ -1,54 +1,61 @@
 export interface IOpenApps {
-  /** Hide or display the professional skills dialog. */
+  /** Whether the Professional Skills dialog is visible. */
   showSkillsDialog: boolean;
 
-  /** Hide or display the projects dialog. */
+  /** Whether the Projects dialog is visible. */
   showProjectsDialog: boolean;
 
-  /** Hide or display the 'contact me' dialog. */
+  /** Whether the Contact Me dialog is visible. */
   showContactDialog: boolean;
 
-  /** Hide or display the education dialog. */
+  /** Whether the Education dialog is visible. */
   showEducationDialog: boolean;
 
-  /** Hide or display the app help dialog. */
+  /** Whether the App Help dialog is visible. */
   showHelpDialog: boolean;
 
-  /** Hide or display the about app dialog. */
+  /** Whether the About App dialog is visible. */
   showAboutAppDialog: boolean;
 
-  /** Hide or display the search app. */
+  /** Whether the Search app is visible. */
   showSearchApp: boolean;
 
-  /** Hide or display the Todo app. */
+  /** Whether the Todo app is visible. */
   showTodoApp: boolean;
 
-  /** Hide or display the Notes app. */
+  /** Whether the Notes app is visible. */
   showNotesApp: boolean;
 
-  /** Hide or display the 3D viewer app. */
+  /** Whether the 3D Viewer app is visible. */
   show3dViewerApp: boolean;
 
-  /** Hide or display the Settings app. */
+  /** Whether the Settings dialog is visible. */
   showSettingsDialog: boolean;
 
-  /** Hide or display the About Me app. */
+  /** Whether the About Me dialog is visible. */
   showAboutMeDialog: boolean;
 
-  /** Hide or display the Weather app. */
+  /** Whether the Weather app is visible. */
   showWeatherApp: boolean;
 
+  /** Whether the New Note dialog is visible. */
   showNewNoteDialog: boolean;
 
+  /** Whether the Edit Note dialog is visible. */
   showEditNoteDialog: boolean;
 
+  /** Whether the Delete Note dialog is visible. */
   showDeleteNoteDialog: boolean;
 
+  /** Whether the New Todo dialog is visible. */
   showNewTodoDialog: boolean;
 
+  /** Whether the Edit Todo dialog is visible. */
   showEditTodoDialog: boolean;
 
+  /** Whether the Delete Todo dialog is visible. */
   showDeleteTodoDialog: boolean;
 
+  /** Whether the Upload STL dialog is visible. */
   showUploadStlDialog: boolean;
 }

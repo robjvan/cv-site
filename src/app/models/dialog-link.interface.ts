@@ -1,12 +1,13 @@
 export interface IDialogLink {
-  /** Tooltop to be shown above the button. */
+  /** Tooltip text displayed when hovering over the button. */
   tooltip: string;
 
-  /** Action to be fired by clicking the button. */
+  /** Callback function to be executed when the button is clicked. */
   action: Function;
 
-  /** List of classes to apply to the button. */
+  /** CSS class names to apply to the button element. */
   class: string;
 
+  /** Indicates whether the associated dialog is currently open. */
   openCheck: boolean;
 }
