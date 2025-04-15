@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { WeatherService } from '../../../services/weather.service';
-import { IForecastData } from '../../../models/forecast-data.interface';
 import { DecimalPipe } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
+import { IForecastData } from '../../../models/weather-data/forecast-data.interface';
 
 @Component({
   selector: 'weather-widget',

@@ -5,8 +5,8 @@ import { LauncherService } from '../../../services/launcher.service';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { WeatherService } from '../../../services/weather.service';
-import { IForecastData } from '../../../models/forecast-data.interface';
 import { DecimalPipe } from '@angular/common';
+import { IForecastData } from '../../../models/weather-data/forecast-data.interface';
 
 @Component({
   selector: 'weather-dialog',
