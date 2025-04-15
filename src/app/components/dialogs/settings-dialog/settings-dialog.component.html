@@ -1,25 +1,46 @@
 <dialog-window class="pane" title="Settings" type="settings">
-  <!-- <h1 class="display-6">Settings</h1> -->
+  <div id="size-wrapper"></div>
+  <h1 class="display-6">Site Settings</h1>
 
   <!-- Show seconds button row -->
-  <div class="display-flex flex-row row">
-    <div class="col align-content-center">
+  <div class="d-flex flex-row">
+    <div class="align-content-center">
       <span>Show seconds in clock</span>
     </div>
 
+    <div class="flex-fill"></div>
+
     <!-- Toggle seconds button  -->
-    <div class="col">
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        id="secondsBtn"
-        (click)="toggleSeconds()"
-      >
-        {{ secondsBtnLabel }}
-      </button>
-    </div>
+    <!-- <div class=""> -->
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      id="secondsBtn"
+      (click)="toggleSeconds()"
+    >
+      {{ secondsBtnLabel }}
+    </button>
+    <!-- </div> -->
   </div>
 
+  <!-- Show weather in top bar row -->
+  <div class="d-flex flex-row mt-2">
+    <div class="align-content-center">
+      <span>Show weather in top bar</span>
+    </div>
+
+    <div class="flex-fill"></div>
+
+    <!-- Toggle weather in top bar button  -->
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      id="showWeatherBtn"
+      (click)="toggleWeather()"
+    >
+      {{ showWeatherBtnLabel }}
+    </button>
+  </div>
   <!-- Show dynamic background row -->
   <!-- <div class="display-flex flex-row row">
     <div class="col align-content-center">
