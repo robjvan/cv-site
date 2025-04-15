@@ -12,16 +12,5 @@ import { AppDockComponent } from './components/app-dock/app-dock.component';
 export class AppComponent implements OnInit {
   constructor() {}
 
-  title = 'Welcome to my site';
-
-  // useDarkMode: WritableSignal<boolean> = signal<boolean>(true);
-
-  ngOnInit(): void {
-    // this.themeService.useDarkMode$.subscribe({
-    //   next: (val) => {
-    //     this.useDarkMode.set(val);
-    //   },
-    //   error: (err) => console.log(err),
-    // });
-  }
+  ngOnInit(): void {}
 }
