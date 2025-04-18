@@ -1,15 +1,16 @@
 @if (!locationAllowed()) {
-<span>Allow location permissions for weather data!</span>
+<!-- <span>Allow location permissions for weather data!</span> -->
 } @else if (forecastData() == undefined) {
 <span>Fetching weather data...</span>
 } @else {
-
-<img
-  src="{{ forecastData()?.current?.condition?.icon }}"
-  alt="Weather conditions icon"
-  id="weather-icon"
-/>
-<span>
-  Feels like {{ forecastData()?.current?.feelslike_c | number : "1.0-0" }}c
-</span>
+<div id="weather-text">
+  <img
+    src="{{ forecastData()?.current?.condition?.icon }}"
+    alt="Weather conditions icon"
+    id="weather-icon"
+  />
+  <span (click)="openWeatherDialog()">
+    Feels like {{ forecastData()?.current?.feelslike_c | number : "1.0-0" }}c
+  </span>
+</div>
 }
