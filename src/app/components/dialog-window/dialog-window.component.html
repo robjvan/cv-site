@@ -1,8 +1,8 @@
 <div class="window" id="window" cdkDrag>
   <div class="window-header d-flex flex-row" cdkDragHandle>
-    <span>{{ title() }}</span>
+    <span class="ms-1">{{ title() }}</span>
     <div class="flex-fill"></div>
-    <div class="minimize-btn d-flex flex-row">
+    <div class="minimize-btn d-flex flex-row me-1">
       <img src="images/arrow-up.svg" (click)="toggleMinimized()" />
     </div>
     <div class="close-btn">
