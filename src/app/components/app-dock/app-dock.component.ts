@@ -41,7 +41,7 @@ export class AppDockComponent implements OnInit {
    */
   public homeBtn: IDialogLink = {
     tooltip: 'Close All',
-    action: () => this.closeAllDialogs(),
+    action: () => this.launcherService.closeAllDialogs(),
     class: 'bi bi-house',
     openCheck: false,
   };
@@ -96,11 +96,6 @@ export class AppDockComponent implements OnInit {
    */
   public openDialog(target: DialogPurpose) {
     this.launcherService.showDialog(target);
-  }
-
-  /** Close all open dialogs to show the home page. */
-  public closeAllDialogs(): void {
-    this.launcherService.closeAllDialogs();
   }
 
   private populateLinks(data: IOpenApps): void {
@@ -163,6 +158,12 @@ export class AppDockComponent implements OnInit {
         action: () => this.openDialog(DialogPurpose.STLVIEWER),
         class: 'bi bi-badge-3d',
         openCheck: data.show3dViewerApp!,
+      },
+      {
+        tooltip: 'Timer',
+        action: () => this.openDialog(DialogPurpose.TIMER),
+        class: 'bi bi-stopwatch',
+        openCheck: data.showTimerDialog!,
       },
     ];
   }
