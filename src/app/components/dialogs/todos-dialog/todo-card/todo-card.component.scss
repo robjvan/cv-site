@@ -3,23 +3,23 @@
 }
 
 .new {
-  background-color: darkkhaki;
+  background-color: var(--cv-purple);
 }
 
 .inprogress {
-  background-color: cornflowerblue;
+  background-color: var(--cv-blue);
 }
 
 .onhold {
-  background-color: darkorange;
+  background-color: var(--cv-orange);
 }
 
 .cancelled {
-  background-color: darkred;
+  background-color: var(--cv-red);
 }
 
 .complete {
-  background-color: yellowgreen;
+  background-color: var(--cv-green);
 }
 
 .blank {
@@ -37,11 +37,50 @@
 }
 
 #edit-btn:hover {
-  color: var(--cv-blue);
-  border: 1px solid var(--cv-blue);
+  color: var(--cv-green);
+  border: 1px solid var(--cv-green);
 }
 
 #delete-btn:hover {
   color: var(--cv-red);
   border: 1px solid var(--cv-red);
+}
+
+.dropdown {
+  .btn {
+    outline: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+#archive-btn:hover {
+  color: var(--cv-blue);
+  border: 1px solid var(--cv-blue);
+}
+
+.archived {
+  color: var(--cv-blue);
+}
+
+.bg-faded {
+  background-color: var(--cv-lightgrey);
+  color: var(--cv-grey);
+  border: none;
+}
+
+.disabled {
+  color: var(--cv-grey) !important;
+  border: none !important;
+  outline: non !important;
+}
+
+.disabled {
+  color: var(--cv-grey) !important;
+}
+
+.disabled-badge {
+  background-color: var(--cv-grey);
+  color: var(--cv-lightgrey);
 }
