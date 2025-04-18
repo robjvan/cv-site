@@ -1,5 +1,5 @@
 import { TodoStatus } from '../enums/todo-status.enum';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class NewTodoDto {
   /** Optional text describing the task in more detail. */
@@ -21,4 +21,9 @@ export class NewTodoDto {
   @IsEnum(TodoStatus)
   @IsOptional()
   status?: TodoStatus;
+
+  /** Optional status of the task, must be a valid TodoStatus enum value. */
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 }
