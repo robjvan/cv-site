@@ -58,4 +58,7 @@ export interface IOpenApps {
 
   /** Whether the Upload STL dialog is visible. */
   showUploadStlDialog: boolean;
+
+  /** Whether the Upload STL dialog is visible. */
+  showTimerDialog: boolean;
 }

@@ -30,9 +30,12 @@ export class LauncherService {
     showEditTodoDialog: false,
     showDeleteTodoDialog: false,
     showUploadStlDialog: false,
+    showTimerDialog: false,
   };
 
-  public openApps$ = new BehaviorSubject(this.initialAppState);
+  public openApps$: BehaviorSubject<IOpenApps> = new BehaviorSubject<IOpenApps>(
+    this.initialAppState
+  );
 
   private readonly dialogMap: Record<DialogPurpose, keyof IOpenApps> = {
     [DialogPurpose.SKILLS]: 'showSkillsDialog',
@@ -54,6 +57,7 @@ export class LauncherService {
     [DialogPurpose.EDIT_TODO]: 'showEditTodoDialog',
     [DialogPurpose.DELETE_TODO]: 'showDeleteTodoDialog',
     [DialogPurpose.UPLOAD_STL]: 'showUploadStlDialog',
+    [DialogPurpose.TIMER]: 'showTimerDialog',
   };
 
   public showDialog(type: DialogPurpose): void {

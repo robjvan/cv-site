@@ -78,5 +78,11 @@
     (mousedown)="bringToFront('education')"
     [style.z-index]="getZIndex('education')"
   ></education-dialog>
+  } @if (getDialogState('showTimerDialog')) {
+  <!-- Timer app dialog -->
+  <timer-dialog
+    (mousedown)="bringToFront('timer')"
+    [style.z-index]="getZIndex('timer')"
+  ></timer-dialog>
   }
 </section>

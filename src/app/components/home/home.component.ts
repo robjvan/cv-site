@@ -24,6 +24,7 @@ import { SettingsService } from '../../services/settings.service';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../services/location.service';
 import { WeatherService } from '../../services/weather.service';
+import { TimerDialogComponent } from '../dialogs/timer-dialog/timer-dialog.component';
 
 declare var VANTA: any;
 
@@ -43,6 +44,7 @@ declare var VANTA: any;
     HelpDialogComponent,
     AboutAppDialogComponent,
     WeatherDialogComponent,
+    TimerDialogComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -84,6 +86,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ['settings', 110],
     ['aboutMe', 112],
     ['weather', 113],
+    ['timer', 114],
   ]);
 
   /** Lifecycle hook that runs on component initialization.
@@ -107,16 +110,41 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.locationService.getUserLocation();
       });
 
-    // Handle weather data
-    this.weatherService.forecastData$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (data) => {
-        if (!data) {
-          this.weatherService.fetchWeatherData();
-        }
-      },
-      error: (err) =>
-        console.error('[WeatherDialogComponent] Forecast error:', err.message),
-    });
+    this.settingsService.enableWeather$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (enableWeather: boolean) => {
+          if (enableWeather) {
+            // Handle weather data
+            this.weatherService.forecastData$
+              .pipe(takeUntil(this.destroy$))
+              .subscribe({
+                next: (data) => {
+                  if (!data) {
+                    this.weatherService.fetchWeatherData();
+                  }
+                },
+                error: (err) =>
+                  console.error(
+                    '[WeatherDialogComponent] Forecast error:',
+                    err.message
+                  ),
+              });
+          }
+        },
+        error: (err) => console.log(err.message),
+      });
+
+    // // Handle weather data
+    // this.weatherService.forecastData$.pipe(takeUntil(this.destroy$)).subscribe({
+    //   next: (data) => {
+    //     if (!data) {
+    //       this.weatherService.fetchWeatherData();
+    //     }
+    //   },
+    //   error: (err) =>
+    //     console.error('[WeatherDialogComponent] Forecast error:', err.message),
+    // });
   }
 
   /** Lifecycle hook that runs after the view has been initialized.
