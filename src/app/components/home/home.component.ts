@@ -134,17 +134,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         },
         error: (err) => console.log(err.message),
       });
-
-    // // Handle weather data
-    // this.weatherService.forecastData$.pipe(takeUntil(this.destroy$)).subscribe({
-    //   next: (data) => {
-    //     if (!data) {
-    //       this.weatherService.fetchWeatherData();
-    //     }
-    //   },
-    //   error: (err) =>
-    //     console.error('[WeatherDialogComponent] Forecast error:', err.message),
-    // });
   }
 
   /** Lifecycle hook that runs after the view has been initialized.
