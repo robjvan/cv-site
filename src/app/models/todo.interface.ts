@@ -5,7 +5,7 @@ export interface ITodo {
   id: string;
 
   /** Current status of the todo item, based on the TodoStatus enum. */
-  status: TodoStatus;
+  status?: TodoStatus;
 
   /** Optional detailed description of the task. */
   description?: string;
