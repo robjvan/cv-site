@@ -1,0 +1,161 @@
+<dialog-window class="pane" title="Timer" type="timer">
+  <div id="size-wrapper"></div>
+
+  <!-- Timer button row -->
+  <div class="d-flex flex-row">
+    <div class="flex-fill"></div>
+    <button
+      class="btn timer-btn"
+      [disabled]="isRunning || !isReset"
+      (click)="selectTimer(0)"
+      [ngClass]="{ active: activeTimer(0) }"
+    >
+      1:00
+    </button>
+    <div class="flex-fill"></div>
+    <button
+      class="btn timer-btn"
+      [disabled]="isRunning || !isReset"
+      (click)="selectTimer(1)"
+      [ngClass]="{ active: activeTimer(1) }"
+    >
+      5:00
+    </button>
+    <div class="flex-fill"></div>
+    <button
+      class="btn timer-btn"
+      [disabled]="isRunning || !isReset"
+      (click)="selectTimer(2)"
+      [ngClass]="{ active: activeTimer(2) }"
+    >
+      15:00
+    </button>
+    <div class="flex-fill"></div>
+    <button
+      class="btn timer-btn"
+      [disabled]="isRunning || !isReset"
+      (click)="selectTimer(3)"
+      [ngClass]="{ active: activeTimer(3) }"
+    >
+      30:00
+    </button>
+    <div class="flex-fill"></div>
+    <button
+      class="btn timer-btn"
+      [disabled]="isRunning || !isReset"
+      (click)="selectTimer(4)"
+      [ngClass]="{ active: activeTimer(4) }"
+    >
+      60:00
+    </button>
+    <div class="flex-fill"></div>
+  </div>
+
+  <!-- Numeric countdown timer -->
+  <div class="d-flex flex-column align-items-center">
+    <span class="my-3 text-center display-1">{{ timeRemaining }}</span>
+  </div>
+
+  <!-- Progress indicator -->
+  <!-- <div
+    class="progress-bar w-75 bg-success"
+    role="progressbar"
+    id="progress-bar"
+    [attr.aria-valuenow]="time()"
+    aria-valuemin="0"
+    [attr.aria-valuemax]="maxTime"
+  ></div> -->
+
+  <ngb-progressbar
+    class="mb-4 mx-3"
+    id="progress-bar"
+    type="default"
+    [value]="time()"
+    [max]="maxTime"
+  />
+  <!-- <ngb-progressbar
+    class="mb-4"
+    id="progress-bar"
+    type="success"
+    [value]="time()"
+    [max]="maxTime"
+  /> -->
+
+  <div class="d-flex flex-column align-items-center mt-4">
+    <!-- Start button -->
+    <button
+      class="btn control-btn"
+      (click)="startTimer()"
+      [disabled]="isRunning || timerCompleted || isReset"
+    >
+      Start
+    </button>
+
+    <!-- Pause Button -->
+    <button
+      class="btn control-btn mt-2"
+      (click)="togglePause()"
+      [disabled]="timerCompleted || isReset"
+    >
+      {{ isPaused ? "Resume" : "Pause" }}
+    </button>
+
+    <!-- Reset button -->
+    <button
+      class="btn control-btn mt-2"
+      (click)="resetTimer()"
+      [ngClass]="{ active: timerCompleted }"
+      [disabled]="isReset || isRunning"
+    >
+      Reset
+    </button>
+
+    <!-- Stop button -->
+    <!-- <button class="btn  mt-2" (click)="stopTimer()">
+      Stop
+    </button> -->
+  </div>
+</dialog-window>
+
+<!-- <div
+  *ngIf="showResetToast"
+  class="toast align-items-center text-bg-warning border-0 position-fixed bottom-0 end-0 m-4 show"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  style="z-index: 1060"
+>
+  <div class="d-flex">
+    <div class="toast-body">Timer has been reset!</div>
+    <button
+      type="button"
+      class="btn-close me-2 m-auto"
+      (click)="showResetToast = false"
+      aria-label="Close"
+    ></button>
+  </div>
+</div> -->
+
+<div
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+  *ngIf="showToast"
+>
+  <div
+    class="toast show align-items-center text-white bg-success border-0"
+    role="alert"
+  >
+    <div class="d-flex">
+      <div class="toast-body">⏰ Timer Complete!</div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="showToast = false"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<audio #alarmAudio>
+  <source src="sounds/desk-bell.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>

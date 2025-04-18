@@ -1,0 +1,35 @@
+#size-wrapper {
+  width: 400px;
+}
+.timer-btn,
+.control-btn {
+  border: 1px solid var(--cv-blue);
+  color: var(--cv-blue);
+}
+
+.timer-btn:hover,
+.control-btn:hover {
+  background-color: var(--cv-blue);
+  color: white;
+}
+
+.timer-btn:active {
+  color: white;
+}
+
+.active {
+  border: 1px solid var(--cv-blue);
+  background-color: var(--cv-blue);
+  color: white;
+}
+
+.display-1 {
+  color: var(--cv-blue);
+  text-shadow: 0px 0px 10px var(--black30);
+}
+
+#progress-bar {
+  background-color: #e0e0e0;
+  color: var(--cv-blue) !important;
+  height: 16px;
+}
