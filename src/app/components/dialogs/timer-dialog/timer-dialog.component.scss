@@ -1,5 +1,5 @@
 #size-wrapper {
-  width: 400px;
+  width: 600px;
 }
 .timer-btn,
 .control-btn {
@@ -23,13 +23,32 @@
   color: white;
 }
 
-.display-1 {
-  color: var(--cv-blue);
-  text-shadow: 0px 0px 10px var(--black30);
-}
-
 #progress-bar {
   background-color: #e0e0e0;
   color: var(--cv-blue) !important;
   height: 16px;
+}
+
+.toast-container {
+  margin-top: 16px;
+  transform: translateX(-50%);
+}
+
+.toast {
+  background-color: var(--cv-blue);
+}
+
+#timer-text-wrapper {
+  margin-top: 108px;
+  color: var(--cv-blue);
+  text-shadow: 0px 0px 3px var(--cv-white), 0px 0px 16px #fff;
+}
+
+#timer-text {
+  width: 100%;
+  font-size: 5rem;
+}
+
+#spinner-wrapper {
+  margin-top: 32px;
 }
