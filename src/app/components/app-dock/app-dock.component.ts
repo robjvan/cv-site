@@ -7,10 +7,14 @@ import { IDialogLink } from '../../models/dialog-link.interface';
 import { Router, RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
-/** AppDockComponent renders a dock-like interface similar to a taskbar.
+/**
+ * The AppDockComponent represents a UI dock similar to a taskbar.
  *
- * It provides quick access to dialogs (like Skills, Projects, Education)
- * and apps (like Todos, Notes, STL Viewer, etc.).
+ * It provides quick-launch buttons for both personal dialogs (About Me, Skills, etc.)
+ * and application tools (Todos, Notes, STL Viewer, etc.).
+ * This component is reactive and updates live with the state of open apps.
+ *
+ * It supports routing (e.g., to settings) and uses Bootstrap icons/tooltips for UX polish.
  */
 @Component({
   selector: 'app-dock',
@@ -19,25 +23,33 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './app-dock.component.scss',
 })
 export class AppDockComponent implements OnInit {
+  /** Subject to trigger cleanup of subscriptions on component destroy. */
   private destroy$ = new Subject<void>();
 
-  /** Writable signal to store the current state of open apps.
-   * This is kept reactive to reflect real-time UI updates.
+  /**
+   * Writable reactive signal holding the current state of open apps/dialogs.
+   *
+   * @type {WritableSignal<IOpenApps | undefined>}
    */
   public openApps: WritableSignal<IOpenApps | undefined> = signal(undefined);
 
-  /** Array of personal info dialog buttons.
-   * Each item includes a tooltip, icon class, and an action callback to trigger dialog.
+  /**
+   * List of dock buttons for personal info dialogs (e.g., About Me, Skills).
+   * Each button has an icon, tooltip, and action handler.
+   *
+   * @type {IDialogLink[]}
    */
   public dialogLinks: IDialogLink[] = [];
 
-  /** Array of app shortcut buttons.
-   * These are interactive tools or utilities the user can open.
+  /**
+   * List of dock buttons for application tools (e.g., Todos, Notes, STL Viewer).
+   *
+   * @type {IDialogLink[]}
    */
   public appLinks: IDialogLink[] = [];
 
-  /** Home button configuration.
-   * Navigates the user to the root (home) route.
+  /**
+   * Dock button for closing all dialogs.
    */
   public homeBtn: IDialogLink = {
     tooltip: 'Close All',
@@ -46,8 +58,8 @@ export class AppDockComponent implements OnInit {
     openCheck: false,
   };
 
-  /** Settings button configuration.
-   * Opens the settings dialog via route navigation.
+  /**
+   * Dock button for opening the Settings dialog.
    */
   public settingsBtn: IDialogLink = {
     tooltip: 'Settings',
@@ -56,18 +68,22 @@ export class AppDockComponent implements OnInit {
     openCheck: this.openApps()?.showSettingsDialog!,
   };
 
-  /** Constructor injects required services.
+  /**
+   * Component constructor, injects services for launching apps/dialogs and navigation.
    *
-   * @param {LauncherService} launcherService Provides the observable stream of open applications.
-   * @param {Router} router Angular's Router service for navigation between routes.
+   * @param {LauncherService} launcherService - Manages open app/dialog state.
+   * @param {Router} router - Angular's router for navigation.
    */
   constructor(
     private readonly launcherService: LauncherService,
     private readonly router: Router
   ) {}
 
-  /** Angular lifecycle hook.
-   * Subscribes to open apps stream on initialization to keep UI in sync.
+  /**
+   * Angular lifecycle hook that initializes the component.
+   *
+   * Subscribes to the launcherService's observable stream to sync the dock
+   * with the currently open applications in real-time.
    */
   public ngOnInit(): void {
     this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
@@ -82,24 +98,33 @@ export class AppDockComponent implements OnInit {
     });
   }
 
-  /** Angular lifecycle hook.
-   * Cleans up any subscriptions to avoid memory leaks.
+  /**
+   * Angular lifecycle hook to clean up observables and avoid memory leaks.
    */
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  /** Handles opening dialogs or navigation based on dialog purpose.
+  /**
+   * Triggers a dialog to open based on the given dialog purpose.
    *
-   * @param {DialogPurpose} target DialogPurpose enum indicating which dialog to open.
+   * @param {DialogPurpose} target - Enum value identifying the dialog to open.
    */
   public openDialog(target: DialogPurpose) {
     this.launcherService.showDialog(target);
   }
 
+  /**
+   * Populates both `dialogLinks` and `appLinks` arrays with button definitions
+   * that reflect the current open state and available dialog/app options.
+   *
+   * This function is re-run every time the app state changes.
+   *
+   * @param {IOpenApps} data - The current state of open apps and dialogs.
+   */
   private populateLinks(data: IOpenApps): void {
-    // Populate the info about me sections
+    // Populate personal information section
     this.dialogLinks = [
       {
         tooltip: 'About Me',
