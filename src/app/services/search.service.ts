@@ -8,7 +8,8 @@ import { SearchProvider } from '../models/enums/search-provider.enum';
 export class SearchService {
   constructor() {}
 
-  public provider = new BehaviorSubject<SearchProvider>(SearchProvider.GOOGLE);
+  public provider: BehaviorSubject<SearchProvider> =
+    new BehaviorSubject<SearchProvider>(SearchProvider.GOOGLE);
 
   public setProvider(provider: SearchProvider) {
     this.provider.next(provider);

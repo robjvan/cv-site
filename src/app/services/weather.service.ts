@@ -23,11 +23,10 @@ export class WeatherService {
     private readonly http: HttpClient
   ) {}
 
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
-  public forecastData$ = new BehaviorSubject<IForecastData | undefined>(
-    undefined
-  );
+  public forecastData$: BehaviorSubject<IForecastData | undefined> =
+    new BehaviorSubject<IForecastData | undefined>(undefined);
 
   // Fetches the raw weather data from the service provider.
   public fetchWeatherData() {

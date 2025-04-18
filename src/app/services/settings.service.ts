@@ -5,9 +5,20 @@ import { BehaviorSubject, take } from 'rxjs';
   providedIn: 'root',
 })
 export class SettingsService {
-  public showSeconds$ = new BehaviorSubject<boolean>(false);
-  public useDarkMode$ = new BehaviorSubject<boolean>(false);
-  public showWeather$ = new BehaviorSubject<boolean>(true);
+  public showSeconds$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+
+  public useDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+
+  public showWeather$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    true
+  );
+
+  public enableWeather$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(true);
 
   /** Toggles display of seconds in the tray clock. */
   public toggleSeconds(): void {
@@ -38,4 +49,12 @@ export class SettingsService {
       error: (err) => console.log(err.message),
     });
   }
+
+  // /** Toggles the weather service in the site. */
+  // public toggleWeather() {
+  //   this.enableWeather$.pipe(take(1)).subscribe({
+  //     next: (showWeather: boolean) => this.enableWeather$.next(!showWeather),
+  //     error: (err) => console.log(err.message),
+  //   });
+  // }
 }

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
 import { FormsModule } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
@@ -14,12 +14,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './new-todo-dialog.component.scss',
 })
 export class NewTodoDialogComponent {
-  title = signal<string>('');
-  description = signal<string>('');
-  dueDate = signal<string>('');
-  status = signal<string>('');
-  hasDueDate = signal<boolean>(false);
-  trackStatus = signal<boolean>(false);
+  title: WritableSignal<string> = signal<string>('');
+  description: WritableSignal<string> = signal<string>('');
+  dueDate: WritableSignal<string> = signal<string>('');
+  status: WritableSignal<string> = signal<string>('');
+  hasDueDate: WritableSignal<boolean> = signal<boolean>(false);
+  trackStatus: WritableSignal<boolean> = signal<boolean>(false);
 
   constructor(
     private readonly todosService: TodoService,

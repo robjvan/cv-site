@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../../services/launcher.service';
@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-note-dialog.component.scss',
 })
 export class NewNoteDialogComponent {
-  public title = signal<string>('');
-  public body = signal<string>('');
+  public title: WritableSignal<string> = signal<string>('');
+  public body: WritableSignal<string> = signal<string>('');
 
   constructor(
     private readonly notesService: NotesService,

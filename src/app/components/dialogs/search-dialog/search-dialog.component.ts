@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
 import { SearchProvider } from '../../../models/enums/search-provider.enum';
 import { CommonModule } from '@angular/common';
@@ -12,9 +12,10 @@ import { SearchService } from '../../../services/search.service';
   styleUrl: './search-dialog.component.scss',
 })
 export class SearchDialogComponent implements OnInit {
-  searchTerm = signal<string>('');
+  searchTerm: WritableSignal<string> = signal<string>('');
 
-  private selectedProvider = signal<SearchProvider>(SearchProvider.GOOGLE);
+  private selectedProvider: WritableSignal<SearchProvider> =
+    signal<SearchProvider>(SearchProvider.GOOGLE);
 
   constructor(private readonly searchService: SearchService) {}
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
@@ -24,7 +24,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './notes-dialog.component.scss',
 })
 export class NotesDialogComponent implements OnInit {
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   private initialState = {
     showNewNoteDialog: false,
@@ -32,8 +32,11 @@ export class NotesDialogComponent implements OnInit {
     showDeleteNoteDialog: false,
   };
 
-  public notes = signal<INote[]>([]);
-  public openApps = signal<Partial<IOpenApps>>(this.initialState);
+  public notes: WritableSignal<INote[]> = signal<INote[]>([]);
+
+  public openApps: WritableSignal<Partial<IOpenApps>> = signal<
+    Partial<IOpenApps>
+  >(this.initialState);
 
   constructor(
     private readonly launcherService: LauncherService,

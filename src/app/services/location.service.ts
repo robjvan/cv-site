@@ -8,8 +8,11 @@ import { IUserLocation } from '../models/user-location.interface';
 export class LocationService {
   constructor() {}
 
-  public location$ = new BehaviorSubject<IUserLocation | undefined>(undefined);
-  public locationAllowed$ = new BehaviorSubject<boolean>(false);
+  public location$: BehaviorSubject<IUserLocation | undefined> =
+    new BehaviorSubject<IUserLocation | undefined>(undefined);
+
+  public locationAllowed$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   public getUserLocation() {
     console.debug('[LocationService] Determining user location...');

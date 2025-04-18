@@ -11,13 +11,13 @@ import moment from 'moment';
 export class NotesService {
   constructor(private readonly storageService: StorageService) {}
 
-  public notes$ = new BehaviorSubject<INote[]>([]);
+  public notes$: BehaviorSubject<INote[]> = new BehaviorSubject<INote[]>([]);
 
-  public reloadNotes() {
+  public reloadNotes(): void {
     this.notes$.next(this.storageService.loadNotes());
   }
 
-  public createNote(title?: string, description?: string) {
+  public createNote(title?: string, description?: string): void {
     const newNote: INote = {
       id: uuidv4(),
       description: description ?? '',
@@ -52,7 +52,7 @@ export class NotesService {
     }
   }
 
-  public updateNote(id: string, title?: string, description?: string) {}
+  public updateNote(id: string, title?: string, description?: string): void {}
 
-  public archiveNote(id: string) {}
+  public archiveNote(id: string): void {}
 }
