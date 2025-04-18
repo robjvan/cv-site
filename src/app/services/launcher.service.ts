@@ -39,7 +39,7 @@ export class LauncherService {
 
   private readonly dialogMap: Record<DialogPurpose, keyof IOpenApps> = {
     [DialogPurpose.SKILLS]: 'showSkillsDialog',
-    [DialogPurpose.EDUCATION]: 'showSkillsDialog',
+    [DialogPurpose.EDUCATION]: 'showEducationDialog',
     [DialogPurpose.HELP]: 'showHelpDialog',
     [DialogPurpose.ABOUT]: 'showAboutAppDialog',
     [DialogPurpose.PROJECTS]: 'showProjectsDialog',
