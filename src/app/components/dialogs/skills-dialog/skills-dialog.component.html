@@ -1,5 +1,7 @@
 <dialog-window class="pane" title="Skills" type="skills">
-  <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">
+  <div class="size-wrapper"></div>
+  <!-- <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">
     Close
-  </button>
+  </button> -->
+  <canvasjs-chart [options]="cloudPlatformsChartOptions"></canvasjs-chart>
 </dialog-window>
