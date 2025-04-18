@@ -23,4 +23,35 @@ new-todo-dialog {
 
 #size-wrapper {
   width: 500px;
+  max-width: 500px;
+}
+
+.todos-viewport {
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+}
+
+#show-archived-btn {
+  border: 1px solid var(--cv-blue);
+  height: 36px;
+  font-size: 0.8rem;
+  color: var(--cv-blue);
+  transition: all 0.05s ease-in-out;
+}
+
+#show-archived-btn:active {
+  transform: scale(0.95);
+}
+
+#show-archived-btn:hover {
+  background-color: var(--cv-blue);
+  color: white;
+}
+
+.show-archived {
+  background-color: var(--cv-blue);
+  color: white !important;
 }
