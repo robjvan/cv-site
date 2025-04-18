@@ -28,7 +28,13 @@ html {
   --cv-grey: #8a8a8a;
   --cv-darkgrey: #181818;
   --cv-black: #000;
-  --cv-red: #a00;
+  // --cv-red: #a00;
+  --cv-red: #8b0000;
+  --cv-yellow: #e7e40d;
+  --cv-green: #89b62f;
+  --cv-orange: #ff8c00;
+  --cv-khaki: #bdb76b;
+  --cv-purple: #750775;
 
   // Transparent black
   --black10: rgba(20, 20, 20, 0.1);
@@ -66,6 +72,12 @@ html {
   --title-blurb-font: "Rock Salt", sans-serif;
   --serif: "Merriweather", serif;
   --sans-serif: "Montserrat", serif;
+
+  @include mat.progress-spinner-overrides(
+    (
+      active-indicator-color: rgba(100, 148, 237, 0.712),
+    )
+  );
 }
 
 * {
