@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
@@ -12,34 +12,34 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './settings-dialog.component.scss',
 })
 export class SettingsDialogComponent {
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
   constructor(
     private readonly launcherService: LauncherService,
     private readonly settingsService: SettingsService
   ) {}
 
-  public showSeconds = signal<boolean>(false);
-  // public useDarkMode = signal<boolean>(false);
-  public useDynamicBg = signal<boolean>(false);
-  public showWeather = signal<boolean>(false);
+  public showSeconds: WritableSignal<boolean> = signal<boolean>(false);
+  public useDynamicBg: WritableSignal<boolean> = signal<boolean>(false);
+  public showWeather: WritableSignal<boolean> = signal<boolean>(false);
+  // public enableWeather: WritableSignal<boolean> = signal<boolean>(true);
 
-  public closeDialog() {
+  public closeDialog(): void {
     this.launcherService.closeDialog(DialogPurpose.SETTINGS);
   }
 
-  public get secondsBtnLabel() {
+  public get secondsBtnLabel(): string {
     return this.showSeconds() === true ? 'ON' : 'OFF';
   }
 
-  // get darkModeBtnLabel() {
-  //   return this.useDarkMode() === true ? 'ON' : 'OFF';
-  // }
-
-  get showWeatherBtnLabel() {
+  get showWeatherBtnLabel(): string {
     return this.showWeather() === true ? 'ON' : 'OFF';
   }
 
-  public ngOnInit() {
+  // get enableWeatherBtnLabel(): string {
+  //   return this.enableWeather() === true ? 'ON' : 'OFF';
+  // }
+
+  public ngOnInit(): void {
     // Set the color and status of the 'toggle seconds button'
     this.settingsService.showSeconds$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (showSeconds: boolean) => {
@@ -59,7 +59,7 @@ export class SettingsDialogComponent {
     // Set the color and status of the 'show weather button'
     this.settingsService.showWeather$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (showWeather: boolean) => {
-        const btn = document.querySelector('#showWeatherBtn');
+        const btn: Element | null = document.querySelector('#showWeatherBtn');
         if (showWeather) {
           btn?.classList.remove('btn-outline-dark');
           btn?.classList.add('btn-dark');
@@ -71,6 +71,25 @@ export class SettingsDialogComponent {
       },
       error: (err: any) => console.log(err.message),
     });
+
+    // // Set the color and status of the 'show weather button'
+    // this.settingsService.enableWeather$
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe({
+    //     next: (enableWeather: boolean) => {
+    //       const btn: Element | null =
+    //         document.querySelector('#toggleWeatherBtn');
+    //       if (enableWeather) {
+    //         btn?.classList.remove('btn-outline-dark');
+    //         btn?.classList.add('btn-dark');
+    //       } else {
+    //         btn?.classList.remove('btn-dark');
+    //         btn?.classList.add('btn-outline-dark');
+    //       }
+    //       this.enableWeather.set(enableWeather);
+    //     },
+    //     error: (err: any) => console.log(err.message),
+    //   });
   }
 
   public ngOnDestroy(): void {
@@ -85,4 +104,8 @@ export class SettingsDialogComponent {
   public toggleWeather(): void {
     this.settingsService.toggleShowWeather();
   }
+
+  // public toggleWeatherService(): void {
+  //   this.settingsService.toggleWeather();
+  // }
 }
