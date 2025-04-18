@@ -87,10 +87,6 @@ export const languages: ISkillMetric[] = [
 
 export const cloudPlatforms: ISkillMetric[] = [
   {
-    title: 'Google Cloud/Firebase',
-    value: 4,
-  },
-  {
     title: 'AWS',
     value: 2,
   },
@@ -99,8 +95,16 @@ export const cloudPlatforms: ISkillMetric[] = [
     value: 0,
   },
   {
+    title: 'ChatGPT',
+    value: 7,
+  },
+  {
     title: 'Git',
     value: 5,
+  },
+  {
+    title: 'Google Cloud/Firebase',
+    value: 4,
   },
 ];
 
