@@ -1,7 +1,62 @@
 <dialog-window class="pane" title="Skills" type="skills">
-  <div class="size-wrapper"></div>
-  <!-- <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">
-    Close
-  </button> -->
-  <canvasjs-chart [options]="cloudPlatformsChartOptions"></canvasjs-chart>
+  <div class="size-wrapper">
+    <span class="display-6">Skills</span>
+    <p class="mt-3">
+      I bring a broad, practical skill set in
+      <span class="fw-bold">full-stack and mobile development</span>, with a
+      strong foundation in support, diagnostics, and embedded integration.
+    </p>
+    <p>
+      On the <span class="fw-bold">frontend</span>, I work confidently with
+      Flutter, Angular, Bootstrap, and responsive UI frameworks. On the
+      <span class="fw-bold">backend</span>, I’ve built secure REST APIs using
+      NestJS, Node.js, PostgreSQL, and MongoDB, often integrating third-party
+      services like Stripe, OpenAI, and Firebase.
+    </p>
+    <p>
+      I have used Redux (and Thunk) for
+      <span class="fw-bold">state management</span> in both mobile and web
+      contexts. My projects have included a Flutter-based e-commerce app with
+      cloud backend, a barcode/ISBN scanning app using the Google Books API, and
+      a 3D printing service built on microservices.
+    </p>
+    <p>
+      Other skills include Git workflows, 3D modeling, barcode scanning,
+      camera-based input, and cross-platform deployment.
+    </p>
+    <p>I’m equally comfortable in Windows, macOS, and Linux environments.</p>
+
+    <div class="row mx-1 mt-2" id="skills-chart">
+      <canvasjs-chart
+        [options]="getChartOptions('skills')"
+        class="col"
+      ></canvasjs-chart>
+    </div>
+
+    <div class="row h-stack gap-3 mx-1 mt-3">
+      <canvasjs-chart
+        [options]="getChartOptions('languages')"
+        class="col"
+        id="skills-chart"
+      ></canvasjs-chart>
+      <canvasjs-chart
+        [options]="getChartOptions('frameworks')"
+        class="col"
+        id="skills-chart"
+      ></canvasjs-chart>
+    </div>
+
+    <div class="row h-stack gap-3 mx-1 mt-3">
+      <canvasjs-chart
+        [options]="getChartOptions('cloudPlatforms')"
+        class="col"
+        id="skills-chart"
+      ></canvasjs-chart>
+      <canvasjs-chart
+        [options]="getChartOptions('operatingSystems')"
+        class="col"
+        id="skills-chart"
+      ></canvasjs-chart>
+    </div>
+  </div>
 </dialog-window>
