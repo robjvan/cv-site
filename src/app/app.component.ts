@@ -9,8 +9,4 @@ import { AppDockComponent } from './components/app-dock/app-dock.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class AppComponent {}
