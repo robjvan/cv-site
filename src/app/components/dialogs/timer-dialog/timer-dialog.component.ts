@@ -106,7 +106,7 @@ export class TimerDialogComponent {
    * Determines whether the timer preset at the given index is currently active.
    *
    * @param {number} index - Index to check.
-   * @returns True if this timer is the selected one.
+   * @returns {boolean} True if this timer is the selected one.
    */
   public activeTimer(index: number): boolean {
     return this.selectedTimerIndex() === index;

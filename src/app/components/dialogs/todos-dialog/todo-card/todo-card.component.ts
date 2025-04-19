@@ -121,7 +121,7 @@ export class TodoCardComponent {
   /**
    * Updates the status of the current todo item.
    *
-   * @param statusKey - Key matching a status in `statusStringMap`.
+   * @param {string} statusKey - Key matching a status in `statusStringMap`.
    */
   public updateStatus(statusKey: string): void {
     if (!this.todo()?.archived) {
