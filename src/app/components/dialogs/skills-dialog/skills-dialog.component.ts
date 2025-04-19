@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
-// import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
-import { LauncherService } from '../../../services/launcher.service';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import { SkillsService } from '../../../services/skills.service';
 import { ISkillMetric } from '../../../models/skill-metric.interface';
-import { take, takeUntil } from 'rxjs';
+import {
+  cloudPlatforms,
+  skillsData,
+  languages,
+  operatingSystems,
+  frameworks,
+} from '../../../services/data/skills.data';
+
+interface IDataPoint {
+  label: string;
+  y: number;
+}
 
 @Component({
   selector: 'skills-dialog',
@@ -13,40 +21,118 @@ import { take, takeUntil } from 'rxjs';
   templateUrl: './skills-dialog.component.html',
   styleUrl: './skills-dialog.component.scss',
 })
-export class SkillsDialogComponent implements OnInit {
-  constructor(
-    private readonly launcherService: LauncherService,
-    private readonly skillsService: SkillsService
-  ) {}
+export class SkillsDialogComponent {
+  constructor() {}
 
-  private skillsMap: Record<string, ISkillMetric[]> = {};
-
-  ngOnInit(): void {
-    this.skillsService.data$.pipe(take(1)).subscribe({
-      next: (val) => {
-        // TODO(RV): Add logic
-      },
-      error: (err) => console.log('Failed to load skills data', err.messsage),
-    });
-  }
-
-  cloudPlatformsChartOptions = {
-    title: {
-      text: 'Basic Column Chart',
-    },
-    data: [
-      {
-        type: 'column',
-        dataPoints: [
-          { label: 'Apple', y: 10 },
-          { label: 'Orange', y: 15 },
-          { label: 'Banana', y: 25 },
-          { label: 'Mango', y: 30 },
-          { label: 'Grape', y: 28 },
-        ],
-      },
-    ],
+  private skillsMap: Record<string, ISkillMetric[] | string> = {
+    skillsData: skillsData,
+    languages: languages,
+    frameworks: frameworks,
+    cloudPlatforms: cloudPlatforms,
+    operatingSystems: operatingSystems,
   };
 
-  processData(key: string): void {}
+  private chartOptionsMap: Record<string, any> = {
+    skills: {
+      title: {
+        text: 'Skills',
+      },
+      axisY: {
+        includeZero: true,
+      },
+      backgroundColor: '#fff',
+      borderWidth: 2,
+      data: [
+        {
+          type: 'column',
+          dataPoints: (this.skillsMap['skillsData'] as ISkillMetric[]).map(
+            (element) => {
+              return { label: element.title, y: element.value };
+            }
+          ),
+        },
+      ],
+    },
+    languages: {
+      title: {
+        text: 'Languages',
+      },
+      axisY: {
+        includeZero: true,
+      },
+      backgroundColor: '#fff',
+      data: [
+        {
+          type: 'column',
+          dataPoints: (this.skillsMap['languages'] as ISkillMetric[]).map(
+            (element) => {
+              return { label: element.title, y: element.value };
+            }
+          ),
+        },
+      ],
+    },
+    frameworks: {
+      title: {
+        text: 'Frameworks',
+      },
+      axisY: {
+        includeZero: true,
+      },
+      backgroundColor: '#fff',
+      color: 'red',
+      data: [
+        {
+          type: 'column',
+          dataPoints: (this.skillsMap['frameworks'] as ISkillMetric[]).map(
+            (element) => {
+              return { label: element.title, y: element.value };
+            }
+          ),
+        },
+      ],
+    },
+    cloudPlatforms: {
+      title: {
+        text: 'Cloud Platforms',
+      },
+      axisY: {
+        includeZero: true,
+      },
+      backgroundColor: '#fff',
+      data: [
+        {
+          type: 'column',
+          dataPoints: (this.skillsMap['cloudPlatforms'] as ISkillMetric[]).map(
+            (element) => {
+              return { label: element.title, y: element.value };
+            }
+          ),
+        },
+      ],
+    },
+    operatingSystems: {
+      title: {
+        text: 'Operating Systems',
+      },
+      axisY: {
+        includeZero: true,
+      },
+      backgroundColor: '#fff',
+      data: [
+        {
+          type: 'column',
+          dataPoints: (
+            this.skillsMap['operatingSystems'] as ISkillMetric[]
+          ).map((element) => {
+            return { label: element.title, y: element.value };
+          }),
+        },
+      ],
+    },
+  };
+
+  public getChartOptions(key: string) {
+    return this.chartOptionsMap[key];
+  }
 }
