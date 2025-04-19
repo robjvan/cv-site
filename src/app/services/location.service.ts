@@ -14,9 +14,7 @@ export class LocationService {
   public locationAllowed$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  public getUserLocation() {
-    console.debug('[LocationService] Determining user location...');
-
+  public processUserLocation(): void {
     if (!navigator.geolocation) {
       console.warn(
         '[LocationService] Geolocation is not supported by this browser.'
@@ -30,12 +28,11 @@ export class LocationService {
             lon: position.coords.longitude,
           };
           this.location$.next(coords);
-          console.debug('[LocationService] Location determined:', coords);
         },
         (err: GeolocationPositionError) => {
           this.setLocationAllowed(false);
-          console.error(
-            '[LocationService] Error getting location:',
+          console.warn(
+            'Please allow location permissions to fetch latest weather data!',
             err.message
           );
         },
@@ -48,7 +45,7 @@ export class LocationService {
     }
   }
 
-  public setLocationAllowed(value: boolean) {
+  public setLocationAllowed(value: boolean): void {
     this.locationAllowed$.next(value);
   }
 }
