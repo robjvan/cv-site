@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         filter((val) => val === undefined)
       )
       .subscribe(() => {
-        this.locationService.getUserLocation();
+        this.locationService.processUserLocation();
       });
 
     this.settingsService.enableWeather$
