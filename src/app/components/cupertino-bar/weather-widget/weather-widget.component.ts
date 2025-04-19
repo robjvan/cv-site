@@ -3,7 +3,7 @@ import { WeatherService } from '../../../services/weather.service';
 import { DecimalPipe } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
-import { IForecastData } from '../../../models/weather-data/forecast-data.interface';
+import { IForecastData } from '../../../models/weather-models/forecast-data.interface';
 import { LauncherService } from '../../../services/launcher.service';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 

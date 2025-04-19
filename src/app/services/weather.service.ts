@@ -13,7 +13,7 @@ import { LocationService } from './location.service';
 import { IUserLocation } from '../models/user-location.interface';
 
 import { HttpClient } from '@angular/common/http';
-import { IForecastData } from '../models/weather-data/forecast-data.interface';
+import { IForecastData } from '../models/weather-models/forecast-data.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -41,11 +41,11 @@ export class WeatherService {
             this.locationService.location$.pipe(
               filter((loc): loc is IUserLocation => !!loc),
               takeUntil(this.destroy$),
-              switchMap((location) => {
-                const url = `${apiUrl}${apiKey}&q=${location.lat},${location.lon}&days=5&aqi=yes&alerts=yes`;
+              switchMap((location: IUserLocation) => {
+                const url: string = `${apiUrl}${apiKey}&q=${location.lat},${location.lon}&days=5&aqi=yes&alerts=yes`;
                 return this.http.post<IForecastData>(url, null).pipe(
-                  catchError((err) => {
-                    console.error('[WeatherService] HTTP error:', err);
+                  catchError((err: any) => {
+                    console.error('[WeatherService] HTTP error:', err.message);
                     return of(undefined);
                   })
                 );

@@ -13,7 +13,7 @@ import { filter, Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { WeatherService } from '../../../services/weather.service';
 import { DecimalPipe } from '@angular/common';
-import { IForecastData } from '../../../models/weather-data/forecast-data.interface';
+import { IForecastData } from '../../../models/weather-models/forecast-data.interface';
 
 /**
  * WeatherDialogComponent provides a full-screen weather forecast view.
