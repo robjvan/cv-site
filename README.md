@@ -1,14 +1,23 @@
 # Readme
 
-- shared launcher service provides a way to open, close, and track which "app" is open
+## Architecture
 
-- use of an enum to dictate dialog purpose for opening/closing
+- shared launcher service provides a way to open, close, and track which "app" is open
 
 - each "app" has a dedicated service providing management of relevant objects (ie. a NotesService handling note objects)
 
-- shared storage service handles IO operations, mostly with localsessions storage
+- shared Storage service handles IO operations, mostly with localsessions storage
 
-- shared settings service handles global settings state - ie. showing seconds in the clock, dark mode (if implemented, undecided)
-<!-- TODO(RV): Decide about dark mode and update this entry -->
+- shared Settings service handles global settings state - ie. showing seconds in the clock
+
+## Technical
+
+- Use of Angular signals and RXJS for dynamic UI feedback and updates
+
+- Full JSDoc comments on class, methods, properties, and logic
+
+- Integration of Angular CDK drag-and-drop, scrollables
+
+- Use of timers, intervals, toast system, and audio playback
 
 <!-- TODO(RV): Add more features, comments, etc. -->
