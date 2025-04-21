@@ -24,14 +24,15 @@ export class SearchDialogComponent implements OnInit {
    * Signal to track the current user-entered search term.
    * Bound to the input field for real-time updates.
    */
-  public searchTerm: WritableSignal<string> = signal<string>('');
+  public searchTerm: WritableSignal<string> = signal('');
 
   /**
    * Signal to track the currently selected search provider.
    * Defaults to Google on initialization.
    */
-  private selectedProvider: WritableSignal<SearchProvider> =
-    signal<SearchProvider>(SearchProvider.GOOGLE);
+  private selectedProvider: WritableSignal<SearchProvider> = signal(
+    SearchProvider.GOOGLE
+  );
 
   /**
    * Constructor injects the SearchService used to launch external searches.

@@ -3,6 +3,10 @@ import { DialogWindowComponent } from '../../dialog-window/dialog-window.compone
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
 
+/**
+ * AboutDialogComponent renders the "About Me" modal dialog,
+ * providing a personal summary and downloadable resume (CV).
+ */
 @Component({
   selector: 'about-me-dialog',
   imports: [DialogWindowComponent],
@@ -10,16 +14,31 @@ import { LauncherService } from '../../../services/launcher.service';
   styleUrl: './about-me-dialog.component.scss',
 })
 export class AboutDialogComponent {
+  /**
+   * Constructor injects the LauncherService for dialog control
+   * and Renderer2 for safe DOM element creation.
+   *
+   * @param launcherService - Controls visibility of dialogs via app state
+   * @param renderer - Angular Renderer2 API for dynamic DOM manipulation
+   */
   constructor(
     private readonly launcherService: LauncherService,
     private readonly renderer: Renderer2
   ) {}
 
+  /**
+   * Closes the "About Me" dialog via the central app state.
+   */
   closeDialog() {
     this.launcherService.closeDialog(DialogPurpose.ABOUT_ME);
   }
 
-  /** Triggers the download of a CV PDF file by creating and clicking an anchor tag dynamically. */
+  /**
+   * Triggers a download of the resume PDF file by dynamically
+   * creating and clicking an anchor (`<a>`) tag using Angular's Renderer2.
+   *
+   * This avoids any direct DOM access and supports SSR safety.
+   */
   public serveCV(): void {
     const link = this.renderer.createElement('a');
     link.setAttribute('target', '_blank');

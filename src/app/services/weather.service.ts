@@ -14,21 +14,46 @@ import { IUserLocation } from '../models/user-location.interface';
 
 import { HttpClient } from '@angular/common/http';
 import { IForecastData } from '../models/weather-models/forecast-data.interface';
+
+/**
+ * WeatherService retrieves weather data from a remote API provider.
+ *
+ * It reacts to permission and location updates from LocationService
+ * and emits forecast data to subscribers via a BehaviorSubject.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
+  /** RxJS Subject used to cleanly unsubscribe from observables on destroy. */
+  private destroy$: Subject<void> = new Subject<void>();
+
+  /**
+   * Emits the latest forecast data or `undefined` if unavailable.
+   * Used by weather-related components to render forecasts reactively.
+   */
+  public forecastData$: BehaviorSubject<IForecastData | undefined> =
+    new BehaviorSubject<IForecastData | undefined>(undefined);
+
+  /**
+   * Constructor injects location tracking and HTTP client services.
+   *
+   * @param locationService - Emits location and permission updates.
+   * @param http - Angular HttpClient used to call weather API.
+   */
   constructor(
     private readonly locationService: LocationService,
     private readonly http: HttpClient
   ) {}
 
-  private destroy$: Subject<void> = new Subject<void>();
-
-  public forecastData$: BehaviorSubject<IForecastData | undefined> =
-    new BehaviorSubject<IForecastData | undefined>(undefined);
-
-  // Fetches the raw weather data from the service provider.
+  /**
+   * Initiates a weather data fetch by:
+   * 1. Waiting for location permission,
+   * 2. Listening to current coordinates,
+   * 3. Requesting forecast from remote API.
+   *
+   * Uses a chained observable flow with cleanup and error handling.
+   */
   public fetchWeatherData() {
     try {
       console.debug('[WeatherService] Fetching weather data...');
@@ -36,17 +61,17 @@ export class WeatherService {
       this.locationService.locationAllowed$
         .pipe(
           takeUntil(this.destroy$),
-          filter((allowed) => allowed), // Only proceed if allowed
+          filter((allowed) => allowed), // Proceed only if user allowed geolocation
           switchMap(() =>
             this.locationService.location$.pipe(
-              filter((loc): loc is IUserLocation => !!loc),
+              filter((loc): loc is IUserLocation => !!loc), // Type guard ensures location is defined
               takeUntil(this.destroy$),
               switchMap((location: IUserLocation) => {
                 const url: string = `${apiUrl}${apiKey}&q=${location.lat},${location.lon}&days=5&aqi=yes&alerts=yes`;
                 return this.http.post<IForecastData>(url, null).pipe(
                   catchError((err: any) => {
                     console.error('[WeatherService] HTTP error:', err.message);
-                    return of(undefined);
+                    return of(undefined); // Continue stream with a fallback value
                   })
                 );
               })
@@ -72,6 +97,10 @@ export class WeatherService {
     }
   }
 
+  /**
+   * Completes the internal subject to unsubscribe from observables
+   * and release memory. Should be called on service teardown if needed.
+   */
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

@@ -18,6 +18,12 @@ import { IColor } from '../models/color.interface';
   providedIn: 'root',
 })
 export class StlViewerService {
+  private selectedColorSubject = new BehaviorSubject<string>('#da660b');
+  private selectedModelSubject = new BehaviorSubject<string>('');
+
+  public selectedColor$ = this.selectedColorSubject.asObservable();
+  public selectedModel$ = this.selectedModelSubject.asObservable();
+
   constructor() {}
 
   private colorSet: IColor[] = [
@@ -63,13 +69,33 @@ export class StlViewerService {
     },
   ];
 
-  selectedColor$: BehaviorSubject<string> = new BehaviorSubject<string>(ORANGE);
+  private modelList: { filename: string; thumb: string }[] = [
+    { filename: 'stl/3dbenchy.stl', thumb: 'images/thumbnails/3dbenchy.jpg' },
+    {
+      filename: 'stl/beard-skull.stl',
+      thumb: 'images/thumbnails/beard-skull.jpeg',
+    },
+    { filename: 'stl/xyz-cube.stl', thumb: 'images/thumbnails/xyz-cube.png' },
+  ];
 
   get colors(): IColor[] {
     return this.colorSet;
   }
 
-  setSelectedColor(color: IColor): void {
-    this.selectedColor$.next(`${color.code}`);
+  get models(): { filename: string; thumb: string }[] {
+    return this.modelList;
+  }
+
+  selectColor(color: string) {
+    this.selectedColorSubject.next(color);
+  }
+
+  selectModel(filename: string) {
+    this.selectedModelSubject.next(filename);
+  }
+
+  public resetModelAndColor() {
+    this.selectedModelSubject.next('');
+    this.selectedColorSubject.next('#da660b');
   }
 }

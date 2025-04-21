@@ -7,6 +7,12 @@ import { DialogPurpose } from '../../../../models/enums/dialog-purpose.enum';
 import { TodoStatus } from '../../../../models/enums/todo-status.enum';
 import { CommonModule } from '@angular/common';
 
+/**
+ * NewTodoDialogComponent provides a UI dialog for creating new todo items.
+ *
+ * It allows users to optionally track due dates and status, then submit
+ * their todo to be saved and persisted locally.
+ */
 @Component({
   selector: 'new-todo-dialog',
   imports: [DialogWindowComponent, FormsModule, CommonModule],
@@ -14,25 +20,48 @@ import { CommonModule } from '@angular/common';
   styleUrl: './new-todo-dialog.component.scss',
 })
 export class NewTodoDialogComponent {
-  title: WritableSignal<string> = signal<string>('');
-  description: WritableSignal<string> = signal<string>('');
-  dueDate: WritableSignal<string> = signal<string>('');
-  status: WritableSignal<string> = signal<string>('');
-  hasDueDate: WritableSignal<boolean> = signal<boolean>(false);
-  trackStatus: WritableSignal<boolean> = signal<boolean>(false);
+  /** Title input value for the new todo. */
+  title: WritableSignal<string> = signal('');
 
+  /** Description or body text of the new todo. */
+  description: WritableSignal<string> = signal('');
+
+  /** Due date as a raw string (optional). */
+  dueDate: WritableSignal<string> = signal('');
+
+  /** Status string input (mapped to TodoStatus). */
+  status: WritableSignal<string> = signal('');
+
+  /** Toggle flag for enabling/disabling the due date field. */
+  hasDueDate: WritableSignal<boolean> = signal(false);
+
+  /** Toggle flag for enabling/disabling status selection. */
+  trackStatus: WritableSignal<boolean> = signal(false);
+
+  /**
+   * Constructor injects services to create todos and manage dialog state.
+   *
+   * @param {TodoService} todosService - Provides methods to store and manage todo objects.
+   * @param {LauncherService} launcherService - Controls visibility of dialogs via centralized app state.
+   */
   constructor(
     private readonly todosService: TodoService,
     private readonly launcherService: LauncherService
   ) {}
 
+  /**
+   * Maps user-readable status labels to the TodoStatus enum.
+   */
   private readonly statusMap: Record<string, TodoStatus> = {
     NEW: TodoStatus.NEW,
     IN_PROGRESS: TodoStatus.IN_PROGRESS,
     ON_HOLD: TodoStatus.ON_HOLD,
   };
 
-  /** Calls the todos service to save a new todo to local storage. */
+  /**
+   * Attempts to save the todo by calling the TodoService.
+   * Performs basic validation and resets form state on success.
+   */
   public saveTodo(): void {
     try {
       if (this.title() !== '' || this.description() !== '') {
@@ -58,7 +87,7 @@ export class NewTodoDialogComponent {
     }
   }
 
-  /** Resets our signals for the next new todo. */
+  /** Clears the form fields to prepare for new entry or after submission. */
   public clearForm(): void {
     this.title.set('');
     this.description.set('');
@@ -66,14 +95,20 @@ export class NewTodoDialogComponent {
     this.status.set('');
   }
 
-  /** Clears the status field when the toggle is unchecked */
+  /**
+   * Clears the status value if the "Track Status" toggle is turned off.
+   * Called when the toggle is unchecked.
+   */
   public handleStatusChecked(): void {
     if (!this.trackStatus()) {
       this.status.set('');
     }
   }
 
-  /** Clears the due date field when the toggle is unchecked */
+  /**
+   * Sets a placeholder or resets the due date if the toggle is turned off.
+   * Called when the "Has Due Date" checkbox is unchecked.
+   */
   public handleDueDateChecked(): void {
     if (!this.hasDueDate()) {
       this.dueDate.set('mm/dd/yyyy');

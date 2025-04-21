@@ -9,7 +9,7 @@ import {
 import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { WeatherService } from '../../../services/weather.service';
 import { DecimalPipe } from '@angular/common';
@@ -36,15 +36,14 @@ export class WeatherDialogComponent implements OnInit {
    * Writable signal holding the latest forecast data.
    * Set to `undefined` initially and updated as data loads.
    */
-  public forecastData: WritableSignal<IForecastData | undefined> = signal<
-    IForecastData | undefined
-  >(undefined);
+  public forecastData: WritableSignal<IForecastData | undefined> =
+    signal(undefined);
 
   /**
    * Indicates whether the user has granted location permissions.
    * Controls conditional UI rendering of weather-related data.
    */
-  public locationAllowed: WritableSignal<boolean> = signal<boolean>(false);
+  public locationAllowed: WritableSignal<boolean> = signal(false);
 
   /**
    * Computed signal indicating loading state.

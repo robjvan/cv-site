@@ -50,6 +50,18 @@ export class TodosDialogComponent implements OnInit {
   /** Subject to destroy subscriptions and avoid memory leaks. */
   private destroy$: Subject<void> = new Subject<void>();
 
+  /**
+   * Writable signal containing the current list of todos.
+   * Filters archived todos unless explicitly toggled.
+   */
+  public todos: WritableSignal<ITodo[]> = signal([]);
+
+  /**
+   * Controls visibility of archived todos.
+   * Toggled via button, affects filtering logic.
+   */
+  public showArchived: WritableSignal<boolean> = signal(false);
+
   /** Default state for dialog visibility when component loads. */
   private initialState: Partial<IOpenApps> = {
     showNewTodoDialog: false,
@@ -71,21 +83,9 @@ export class TodosDialogComponent implements OnInit {
    * Writable signal for tracking open dialogs.
    * Subscribed to LauncherService's openApps$ stream.
    */
-  private openDialogs: WritableSignal<Partial<IOpenApps>> = signal<
-    Partial<IOpenApps>
-  >(this.initialState);
-
-  /**
-   * Writable signal containing the current list of todos.
-   * Filters archived todos unless explicitly toggled.
-   */
-  public todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
-
-  /**
-   * Controls visibility of archived todos.
-   * Toggled via button, affects filtering logic.
-   */
-  public showArchived: WritableSignal<boolean> = signal<boolean>(false);
+  private openDialogs: WritableSignal<Partial<IOpenApps>> = signal(
+    this.initialState
+  );
 
   /**
    * Constructor injects required services.

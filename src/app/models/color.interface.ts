@@ -1,18 +1,14 @@
-/** Describes a color record.
- *
- * @param {string} name - Name of the color.
- * @param {string} code - Hex code for the color.
- *
- * @example
- * const color: IColor = {
- *   name: 'black',
- *   code: '0xff000000',
- * }
- */
+/** Describes a color record. */
 export interface IColor {
-  /** Name of the color. */
+  /**
+   * Human-readable name of the color.
+   * Example: "black".
+   */
   name: string;
 
-  /** Hex code for the color. */
+  /**
+   * Color code in hex format (can include alpha channel).
+   * Example: '0xff000000
+   */
   code: string;
 }
