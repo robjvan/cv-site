@@ -56,9 +56,9 @@ avatar-header {
   padding: 12px 18px;
   margin-top: 16px;
   font-size: 1.25rem;
-  color: white;
-  background-color: var(--cv-blue);
-  border: none;
+  color: var(--cv-blue);
+  background-color: var(--cv-white);
+  border: 1px solid var(--cv-blue);
   border-radius: 10px;
   transition: 0.25s ease;
   cursor: pointer;
@@ -68,7 +68,7 @@ avatar-header {
 }
 
 #cvButton:hover {
-  background-color: var(--cv-darkgrey);
+  background-color: var(--cv-blue);
   color: var(--cv-white);
   box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.6),
     0px 0px 10px rgba(255, 255, 255, 0.3);
