@@ -27,7 +27,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         @for (todo of todoList; track todo) {
-        <div class="example-box" cdkDrag>
+        <div cdkDrag>
           <todo-card [todo]="todo"></todo-card>
         </div>
         }
