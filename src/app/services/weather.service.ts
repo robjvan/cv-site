@@ -8,7 +8,7 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { apiUrl, apiKey } from '../constants';
+import { apiUrl, apiKey } from '../keys';
 import { LocationService } from './location.service';
 import { IUserLocation } from '../models/user-location.interface';
 
