@@ -6,7 +6,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -14,6 +14,7 @@ import { LocationService } from '../../../services/location.service';
 import { WeatherService } from '../../../services/weather.service';
 import { DecimalPipe } from '@angular/common';
 import { IForecastData } from '../../../models/weather-models/forecast-data.interface';
+import { CvButtonComponent } from '../../common/cv-button/cv-button.component';
 
 /**
  * WeatherDialogComponent provides a full-screen weather forecast view.
@@ -24,7 +25,7 @@ import { IForecastData } from '../../../models/weather-models/forecast-data.inte
  */
 @Component({
   selector: 'weather-dialog',
-  imports: [DialogWindowComponent, DecimalPipe],
+  imports: [DialogWindowComponent, DecimalPipe, CvButtonComponent],
   templateUrl: './weather-dialog.component.html',
   styleUrls: ['./weather-dialog.component.scss'],
 })
@@ -111,10 +112,10 @@ export class WeatherDialogComponent implements OnInit {
    * Forces a refresh of weather data.
    * Resets the forecast signal and triggers a new data fetch.
    */
-  public refreshWeather(): void {
+  public refreshWeather = (): void => {
     this.forecastData.set(undefined);
     this.weatherService.fetchWeatherData();
-  }
+  };
 
   /**
    * Closes the weather dialog using the launcher service.

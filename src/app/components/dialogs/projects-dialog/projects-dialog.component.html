@@ -1,5 +1,22 @@
 <dialog-window class="pane" title="Projects" type="projects">
-  <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">
-    Close
-  </button>
+  <span class="display-6">Projects</span>
+  <p class="mt-3">
+    Browse through a curated set of full-stack applications, each demonstrating
+    practical skills in frontend, backend, AI integration, and real-time system
+    control, complete with project summaries and technology stacks.
+  </p>
+
+  <!-- Project carousel -->
+  <ngb-carousel
+    id="projectsCarousel"
+    class="carousel carousel-dark slide mt-4"
+    #projectsCarousel
+    [interval]="0"
+  >
+    @for (project of projectList(); track project.title) {
+    <ng-template ngbSlide class="active">
+      <project-card [project]="project" />
+    </ng-template>
+    }
+  </ngb-carousel>
 </dialog-window>

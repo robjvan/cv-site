@@ -5,28 +5,29 @@
   <!-- Show seconds button row -->
   <div class="d-flex flex-row">
     <div class="align-content-center">
-      <span>Show seconds in clock</span>
+      <span class="control-label">Show seconds in clock</span>
     </div>
 
     <div class="flex-fill"></div>
 
     <!-- Toggle seconds button  -->
-    <!-- <div class=""> -->
     <button
       type="button"
       class="btn btn-outline-dark"
       id="secondsBtn"
       (click)="toggleSeconds()"
+      [ngClass]="{ active: showSeconds() }"
     >
       {{ secondsBtnLabel }}
     </button>
-    <!-- </div> -->
   </div>
+
+  <hr class="mx-3" />
 
   <!-- Show weather in top bar row -->
   <div class="d-flex flex-row mt-2">
     <div class="align-content-center">
-      <span>Show weather in top bar</span>
+      <span class="control-label">Show weather in top bar</span>
     </div>
 
     <div class="flex-fill"></div>
@@ -37,6 +38,7 @@
       class="btn btn-outline-dark"
       id="showWeatherBtn"
       (click)="toggleWeather()"
+      [ngClass]="{ active: showWeather() }"
     >
       {{ showWeatherBtnLabel }}
     </button>
@@ -79,6 +81,7 @@
       </button>
     </div> -->
   <!-- </div> -->
+
   <!-- Show toggle dark mode row -->
   <!-- <div class="display-flex flex-row row">
     <div class="col align-content-center">
@@ -97,14 +100,4 @@
       </button>
     </div>
   </div> -->
-
-  <!-- Close dialog button -->
-  <!-- <button
-    id="close-button"
-    type="button"
-    class="btn btn-outline-dark"
-    (click)="closeDialog()"
-  >
-    Close
-  </button> -->
 </dialog-window>

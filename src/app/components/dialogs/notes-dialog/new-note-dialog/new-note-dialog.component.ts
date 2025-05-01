@@ -1,5 +1,5 @@
 import { Component, signal, WritableSignal } from '@angular/core';
-import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../../common/dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../../services/launcher.service';
 import { NotesService } from '../../../../services/notes.service';

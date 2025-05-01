@@ -1,0 +1,19 @@
+<div style="height: 300px" class="d-flex flex-column text-center">
+  <!-- Project title, description, and link -->
+  <h3>{{ project().title }}</h3>
+  <div class="description-wrapper mb-1">
+    <span id="description">{{ project().description }}</span>
+  </div>
+  <span class="fst-italic my-1 text-muted">Stack: {{ project().stack }} </span>
+  <a [href]="project().link">{{ project().link }}</a>
+
+  <!-- Thumbnail images of the project -->
+  @for(image of project().thumbnails; track image) {
+  <img
+    [src]="image"
+    class="d-block w-100"
+    alt="{{ project().title }} thumbnail"
+    style="max-height: 300px; object-fit: cover"
+  />
+  }
+</div>

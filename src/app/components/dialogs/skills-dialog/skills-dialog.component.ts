@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ISkillMetric } from '../../../models/skill-metric.interface';
-import {
-  cloudPlatforms,
-  skillsData,
-  languages,
-  operatingSystems,
-  frameworks,
-} from '../../../services/data/skills.data';
 import { CommonModule } from '@angular/common';
 import { DownloadService } from '../../../services/download.service';
+import {
+  skillsData,
+  languages,
+  frameworks,
+  cloudPlatforms,
+  operatingSystems,
+} from '../../../data/personal-info.data';
+import { CvButtonComponent } from '../../common/cv-button/cv-button.component';
 
 /**
  * SkillsDialogComponent renders a multi-tabbed view of categorized skills
@@ -28,6 +29,7 @@ import { DownloadService } from '../../../services/download.service';
     CanvasJSAngularChartsModule,
     MatTabsModule,
     CommonModule,
+    CvButtonComponent,
   ],
   templateUrl: './skills-dialog.component.html',
   styleUrl: './skills-dialog.component.scss',
@@ -254,8 +256,7 @@ export class SkillsDialogComponent implements OnInit {
    * Downloads a PDF summary of the user's skills, grouped by category.
    * Includes a personalized paragraph overview and exported chart data.
    */
-  public printSkills(): void {
-    // const summary = `I bring a broad, practical skill set in full-stack and mobile development, with experience across backend architecture, frontend design, and embedded integration.`;
+  public printSkills = (): void => {
     const summary = `I bring a broad, practical skill set in full-stack and mobile development, with a strong foundation in support, diagnostics, and embedded integration. \n\n On the frontend, I work confidently with Flutter, Angular, Bootstrap, and responsive UI frameworks. On the backend, I’ve built secure REST APIs using NestJS, Node.js, PostgreSQL, and MongoDB, often integrating third-party services like Stripe, OpenAI, and Firebase. \n\n I have used Redux (and Thunk) for state management in both mobile and web contexts. My projects have included a Flutter-based e-commerce app with cloud backend, a barcode/ISBN scanning app using the Google Books API, and a 3D printing service built on microservices. \n\n Other skills include Git workflows, 3D modeling, barcode scanning, camera-based input, and cross-platform deployment. \n\n I’m equally comfortable in Windows, macOS, and Linux environments. \n\n I’m a quick learner and enjoy tackling new challenges. I’m always looking for opportunities to expand my skill set and take on new projects.`;
 
     const categories = {
@@ -267,5 +268,5 @@ export class SkillsDialogComponent implements OnInit {
     };
 
     this.printService.downloadSkillsPdf(categories, summary);
-  }
+  };
 }

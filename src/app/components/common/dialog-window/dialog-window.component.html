@@ -1,0 +1,17 @@
+<div class="window" id="window" cdkDrag>
+  <div class="window-header d-flex flex-row" cdkDragHandle>
+    <span class="ms-1">{{ title() }}</span>
+    <div class="flex-fill"></div>
+    <div class="minimize-btn d-flex flex-row me-1">
+      <img src="images/arrow-up.svg" (click)="toggleMinimized()" />
+    </div>
+    <div class="close-btn">
+      <i class="bi bi-x" (click)="closeDialog()"></i>
+    </div>
+  </div>
+  @if (!minimized()) {
+  <div class="window-content p-3" style="padding: 10px" cdkScrollable>
+    <ng-content></ng-content>
+  </div>
+  }
+</div>

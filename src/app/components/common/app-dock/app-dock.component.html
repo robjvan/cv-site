@@ -1,0 +1,70 @@
+<!--
+  Dock UI Section
+  This renders the full app dock (similar to a taskbar).
+  Divided into logical groups: Home | Dialogs | Apps | Settings
+-->
+<section id="app-dock" class="hstack dock-padding gap-2">
+  <!-- Home Button -->
+  <div class="vstack">
+    <i
+      [class]="homeBtn.class"
+      (click)="homeBtn.action()"
+      [ngbTooltip]="homeBtn.tooltip"
+      placement="top"
+      aria-label="Home"
+    ></i>
+  </div>
+
+  <!-- Visual Separator -->
+  <div class="vr"></div>
+
+  <!-- Dialog Buttons (e.g., Skills, Projects, Education) -->
+  @for(dialogLink of dialogLinks; track dialogLink.tooltip) {
+  <div class="vstack">
+    <i
+      [class]="dialogLink.class"
+      [ngbTooltip]="dialogLink.tooltip"
+      (click)="dialogLink.action()"
+      [attr.aria-label]="dialogLink.tooltip"
+    ></i>
+    @if (dialogLink.openCheck) {
+    <div class="dot center"></div>
+    }
+  </div>
+  }
+
+  <!-- Visual Separator -->
+  <div class="vr"></div>
+
+  <!-- App Buttons (e.g., Todos, Notes, STL Viewer) -->
+  @for(appLink of appLinks; track appLink.tooltip) {
+  <div class="vstack">
+    <i
+      [class]="appLink.class"
+      [ngbTooltip]="appLink.tooltip"
+      (click)="appLink.action()"
+      [attr.aria-label]="appLink.tooltip"
+    ></i>
+    @if (appLink.openCheck) {
+    <div class="dot center"></div>
+    }
+  </div>
+  }
+
+  <!-- Visual Separator -->
+  <div class="vr"></div>
+
+  <!-- Settings Button -->
+  <div class="vstack">
+    <i
+      [class]="settingsBtn.class"
+      (click)="settingsBtn.action()"
+      [ngbTooltip]="settingsBtn.tooltip"
+      placement="top"
+      aria-label="Settings"
+    ></i>
+    @if (openApps()?.showSettingsDialog) {
+    <div class="dot center"></div>
+    }
+  </div>
+</section>

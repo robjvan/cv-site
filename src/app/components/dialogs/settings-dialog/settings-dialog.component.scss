@@ -11,3 +11,29 @@ h1 {
 #size-wrapper {
   min-width: 400px;
 }
+
+.btn {
+  border: 1px solid var(--cv-blue);
+  background-color: var(--cv-white);
+  color: var(--cv-blue);
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--cv-blue);
+  color: var(--cv-white);
+  border: 1px solid var(--cv-blue);
+}
+
+.active {
+  background-color: var(--cv-blue);
+  color: var(--cv-white);
+  border: 1px solid var(--cv-blue);
+}
+
+.control-label {
+  font-size: 1.2rem;
+  // color: var(--cv-blue);
+}

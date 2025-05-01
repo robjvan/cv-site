@@ -1,8 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { IProjectData } from '../../../models/project-data.interface';
-import { projectsData } from '../../../services/data/projects.data';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { projectsData } from '../../../data/personal-info.data';
+import { ProjectCardComponent } from './project-card/project-card.component';
 
 /**
  * ProjectsDialogComponent displays a list of featured projects in a carousel layout.
@@ -11,7 +12,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
  */
 @Component({
   selector: 'projects-dialog',
-  imports: [DialogWindowComponent, NgbCarouselModule],
+  imports: [DialogWindowComponent, NgbCarouselModule, ProjectCardComponent],
   templateUrl: './projects-dialog.component.html',
   styleUrl: './projects-dialog.component.scss',
 })

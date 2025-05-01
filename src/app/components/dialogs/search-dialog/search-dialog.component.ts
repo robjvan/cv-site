@@ -1,9 +1,16 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { SearchProvider } from '../../../models/enums/search-provider.enum';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../../../services/search.service';
+import { CvButtonComponent } from '../../common/cv-button/cv-button.component';
 
 /**
  * SearchDialogComponent provides a user interface for launching external searches
@@ -15,11 +22,16 @@ import { SearchService } from '../../../services/search.service';
  */
 @Component({
   selector: 'search-dialog',
-  imports: [DialogWindowComponent, CommonModule, FormsModule],
+  imports: [
+    DialogWindowComponent,
+    CommonModule,
+    FormsModule,
+    CvButtonComponent,
+  ],
   templateUrl: './search-dialog.component.html',
   styleUrl: './search-dialog.component.scss',
 })
-export class SearchDialogComponent implements OnInit {
+export class SearchDialogComponent implements AfterViewInit {
   /**
    * Signal to track the current user-entered search term.
    * Bound to the input field for real-time updates.
@@ -44,8 +56,8 @@ export class SearchDialogComponent implements OnInit {
   /**
    * Angular lifecycle hook that initializes the default selected provider.
    */
-  ngOnInit(): void {
-    this.selectProvider('google');
+  ngAfterViewInit(): void {
+    setTimeout(() => this.selectProvider('google'), 0);
   }
 
   /**
@@ -99,14 +111,14 @@ export class SearchDialogComponent implements OnInit {
    *
    * Delegates execution to the SearchService.
    */
-  public launchSearch(): void {
+  public launchSearch = (): void => {
     if (this.searchTerm() !== '') {
       this.searchService.launchSearch(
         this.selectedProvider(),
         this.searchTerm()
       );
     }
-  }
+  };
 
   /**
    * Clears the current search term input.

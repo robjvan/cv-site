@@ -1,7 +1,8 @@
 import { Component, Renderer2 } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { DialogPurpose } from '../../../models/enums/dialog-purpose.enum';
 import { LauncherService } from '../../../services/launcher.service';
+import { CvButtonComponent } from '../../common/cv-button/cv-button.component';
 
 /**
  * AboutDialogComponent renders the "About Me" modal dialog,
@@ -9,7 +10,7 @@ import { LauncherService } from '../../../services/launcher.service';
  */
 @Component({
   selector: 'about-me-dialog',
-  imports: [DialogWindowComponent],
+  imports: [DialogWindowComponent, CvButtonComponent],
   templateUrl: './about-me-dialog.component.html',
   styleUrl: './about-me-dialog.component.scss',
 })
@@ -39,11 +40,11 @@ export class AboutDialogComponent {
    *
    * This avoids any direct DOM access and supports SSR safety.
    */
-  public serveCV(): void {
+  public serveCV = (): void => {
     const link = this.renderer.createElement('a');
     link.setAttribute('target', '_blank');
     link.setAttribute('href', '/docs/rv_cv.pdf');
     link.click();
     link.remove();
-  }
+  };
 }

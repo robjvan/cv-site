@@ -1,0 +1,33 @@
+#cvButton {
+  padding: 12px 18px;
+  margin-top: 16px;
+  font-size: 1.25rem;
+  color: var(--cv-blue);
+  background-color: var(--cv-white);
+  border: 1px solid var(--cv-blue);
+  border-radius: 10px;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+#cvButton:hover {
+  background-color: var(--cv-blue);
+  color: var(--cv-white);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.6),
+    0px 0px 10px rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+
+#cvButton:active {
+  transform: scale(0.98);
+}
+
+.disabled {
+  opacity: 0.5 !important;
+  color: var(--cv-blue) !important;
+  cursor: not-allowed !important;
+  // border: 1px solid var(--cv-lightgrey) !important;
+  font-weight: normal !important;
+  background-color: var(--cv-white) !important;
+  transform: none !important;
+}

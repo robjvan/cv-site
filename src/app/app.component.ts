@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CupertinoBarComponent } from './components/cupertino-bar/cupertino-bar.component';
-import { AppDockComponent } from './components/app-dock/app-dock.component';
+import { AppDockComponent } from './components/common/app-dock/app-dock.component';
+import { CupertinoBarComponent } from './components/common/cupertino-bar/cupertino-bar.component';
 
 @Component({
   selector: 'app-root',

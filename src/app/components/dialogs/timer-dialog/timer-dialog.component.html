@@ -59,17 +59,7 @@
       <div class="flex-fill"></div>
     </div>
 
-    <!-- Progress bar -->
-    <!-- <ngb-progressbar
-      class="mb-4 mx-3"
-      id="progress-bar"
-      type="default"
-      [value]="time()"
-      [max]="maxTime"
-    /> -->
-
     @if (!isReset) {
-
     <!-- Progress Spinner -->
     <div class="d-flex justify-content-center" id="spinner-wrapper">
       <mat-progress-spinner
@@ -88,27 +78,14 @@
     </div>
 
     <div class="d-flex flex-column align-items-center mt-4">
-      <!-- Start button -->
-      @if (!hideStart()) {
+      <!-- Start/pause/resume button -->
       <button
         class="btn control-btn"
-        (click)="startTimer()"
-        [disabled]="isRunning || timerCompleted || isReset"
-      >
-        Start
-      </button>
-      }
-
-      <!-- Pause Button -->
-      @if (hideStart()) {
-      <button
-        class="btn control-btn mt-2"
-        (click)="togglePause()"
+        (click)="togglePauseOrStart()"
         [disabled]="timerCompleted || isReset"
       >
-        {{ isPaused ? "Resume" : "Pause" }}
+        {{ isPaused ? "Resume" : isRunning ? "Pause" : "Start" }}
       </button>
-      }
 
       <!-- Reset button -->
       <button
@@ -124,6 +101,7 @@
   </div>
 </dialog-window>
 
+<!-- Toast that shows when the timer is complete -->
 <div class="toast-container position-fixed top-0 p-3" *ngIf="showToast">
   <div class="toast show align-items-center text-white border-0" role="alert">
     <div class="d-flex">
@@ -137,6 +115,7 @@
   </div>
 </div>
 
+<!-- Audio clip that plays when the timer is complete -->
 <audio #alarmAudio>
   <source src="sounds/desk-bell.mp3" type="audio/mpeg" />
   Your browser does not support the audio element.

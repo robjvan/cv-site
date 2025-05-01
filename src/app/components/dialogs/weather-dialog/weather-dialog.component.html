@@ -1,5 +1,5 @@
 <dialog-window class="pane" title="Weather" type="weather">
-  <div id="size-wrapper">
+  <div id="size-wrapper" class="d-flex flex-column align-items-center">
     @if (!locationAllowed()) {
     <span>Allow location permissions for weather data!</span>
     } @else if (forecastData() === undefined) {
@@ -10,7 +10,6 @@
 
     <!-- Current conditions icon -->
     <img
-      class="center"
       src="{{ forecastData()?.current?.condition?.icon }}"
       id="conditions-icon"
     />
@@ -33,13 +32,15 @@
       {{ forecastData()?.current?.wind_kph | number : "1.0-0" }} kph
     </p>
 
-    <button
+    <!-- Refresh button -->
+    <cv-button label="🔃 Refresh" [action]="refreshWeather"></cv-button>
+    <!-- <button
       type="button"
       class="btn btn-outline-dark center"
       (click)="refreshWeather()"
     >
       Refresh
-    </button>
+    </button> -->
     }
   </div>
 </dialog-window>

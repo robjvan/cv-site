@@ -21,3 +21,19 @@ hr {
   margin: 16px 32px;
   color: var(--cv-grey);
 }
+
+#size-wrapper {
+  min-width: 400px;
+}
+
+.form-check-input {
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--cv-lightgrey);
+  color: var(--cv-blue);
+}
+
+.form-check-input:checked {
+  background-color: var(--cv-blue);
+  border: 1px solid var(--cv-blue);
+}

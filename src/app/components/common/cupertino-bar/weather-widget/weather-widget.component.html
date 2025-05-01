@@ -1,0 +1,14 @@
+@if (forecastData() == undefined) {
+<span>Fetching weather data...</span>
+} @else {
+<div id="weather-text" (click)="openWeatherDialog()">
+  <img
+    src="{{ forecastData()?.current?.condition?.icon }}"
+    alt="Weather conditions icon"
+    id="weather-icon"
+  />
+  <span>
+    Feels like {{ forecastData()?.current?.feelslike_c | number : "1.0-0" }}c
+  </span>
+</div>
+}

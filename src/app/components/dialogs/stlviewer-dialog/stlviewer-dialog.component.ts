@@ -8,7 +8,7 @@ import {
   viewChild,
   WritableSignal,
 } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
@@ -17,6 +17,7 @@ import { BG_WHITE, BG_MED_GREY } from '../../../constants';
 import { CommonModule } from '@angular/common';
 import * as THREE from 'three';
 import { IColor } from '../../../models/color.interface';
+import { CvButtonComponent } from '../../common/cv-button/cv-button.component';
 
 /**
  * StlviewerDialogComponent renders an interactive 3D preview of STL models using Three.js.
@@ -26,7 +27,7 @@ import { IColor } from '../../../models/color.interface';
  */
 @Component({
   selector: 'stlviewer-dialog',
-  imports: [DialogWindowComponent, CommonModule],
+  imports: [DialogWindowComponent, CommonModule, CvButtonComponent],
   templateUrl: './stlviewer-dialog.component.html',
   styleUrl: './stlviewer-dialog.component.scss',
 })
@@ -294,7 +295,7 @@ export class StlviewerDialogComponent
     this.stlViewerService.selectColor(color);
   }
 
-  public resetDialog(): void {
+  public resetDialog = (): void => {
     this.stlViewerService.resetModelAndColor();
-  }
+  };
 }

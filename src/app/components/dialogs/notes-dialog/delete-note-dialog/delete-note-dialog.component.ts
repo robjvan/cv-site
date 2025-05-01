@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../../common/dialog-window/dialog-window.component';
 import { INote } from '../../../../models/note.interface';
 
 @Component({

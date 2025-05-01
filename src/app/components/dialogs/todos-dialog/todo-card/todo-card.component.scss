@@ -1,3 +1,8 @@
+.card {
+  box-shadow: 0px 0px 2px var(--cv-darkgrey);
+  margin: 0px 4px;
+}
+
 .card-title {
   margin-top: 2px;
 }
@@ -83,4 +88,8 @@
 .disabled-badge {
   background-color: var(--cv-grey);
   color: var(--cv-lightgrey);
+}
+
+#todo-title {
+  width: 250px;
 }

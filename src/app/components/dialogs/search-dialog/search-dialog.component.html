@@ -1,4 +1,4 @@
-<dialog-window class="pane" title="Universal Search" type="search">
+<dialog-window class="pane" title="MultiSearch" type="search">
   <div id="size-wrapper"></div>
   <form (ngSubmit)="launchSearch()">
     <!-- Search Term Text Input -->
@@ -86,8 +86,10 @@
       <!-- Filler to take unused space -->
       <div class="flex-fill"></div>
     </div>
-    <button type="submit" class="btn btn-dark center" id="submit-btn">
-      <span> Go </span>
-    </button>
+
+    <!-- Submit button -->
+    <div class="d-flex flex-row justify-content-center mt-3">
+      <cv-button label="🔍 Search" [action]="launchSearch"></cv-button>
+    </div>
   </form>
 </dialog-window>

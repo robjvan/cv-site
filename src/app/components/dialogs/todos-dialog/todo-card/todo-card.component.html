@@ -2,9 +2,12 @@
   <div class="card-body">
     <div class="d-flex flex-row align-items-start">
       <!-- Title -->
-      <div class="card-title fw-bold">
+      <div class="card-title fw-bold" id="todo-title">
         {{ todo()!.title }}
       </div>
+
+      <!-- Spacer -->
+      <div class="flex-fill"></div>
 
       @if (status !== undefined) {
       <!-- Status badge/selector -->
@@ -63,20 +66,13 @@
       </div>
       }
 
-      <!-- Spacer -->
-      <div class="flex-fill"></div>
-
       <!-- Edit button -->
       <button
-        class="blank me-2"
+        class="blank mx-2"
         aria-label="Edit todo button"
         title="Edit todo"
       >
-        <i
-          id="edit-btn"
-          class="bi bi-pencil control-btn"
-          [ngClass]="{ disabled: archived }"
-        ></i>
+        <i id="edit-btn" class="bi bi-pencil control-btn disabled"></i>
       </button>
 
       <!-- Archive button -->

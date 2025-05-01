@@ -1,0 +1,40 @@
+.model-thumbnails img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  margin: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.model-thumbnails img.selected {
+  border-color: var(--cv-blue);
+}
+
+.color-picker {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.color-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.selected,
+.btn-primary {
+  border-color: var(--cv-blue);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#productView {
+  box-shadow: 0px 0px 5px var(--cv-grey);
+  border-radius: 10px;
+}

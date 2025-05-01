@@ -1,5 +1,25 @@
 <dialog-window class="pane" title="Education" type="education">
-  <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">
-    Close
-  </button>
+  <div id="size-wrapper">
+    <div class="d-flex flex-row align-items-center" id="header-row">
+      <p>
+        A visual timeline highlighting my academic achievements and
+        certifications, with interactive event markers providing details on each
+        major milestone in my development journey.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="event" *ngFor="let event of educationEvents; let i = index">
+        <div *ngIf="i % 2 === 0" class="date top">{{ event.date }}</div>
+        <div *ngIf="i % 2 !== 0" class="desc top">{{ event.title }}</div>
+
+        <div class="dot"></div>
+
+        <div *ngIf="i % 2 === 0" class="desc bottom">
+          {{ event.title }}
+        </div>
+        <div *ngIf="i % 2 !== 0" class="date bottom">{{ event.date }}</div>
+      </div>
+    </div>
+  </div>
 </dialog-window>

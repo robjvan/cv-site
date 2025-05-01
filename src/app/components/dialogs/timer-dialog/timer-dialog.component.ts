@@ -5,7 +5,7 @@ import {
   viewChild,
   WritableSignal,
 } from '@angular/core';
-import { DialogWindowComponent } from '../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../common/dialog-window/dialog-window.component';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -61,9 +61,6 @@ export class TimerDialogComponent {
 
   /** Signal tracking the remaining time (in milliseconds). */
   public time: WritableSignal<number> = signal<number>(0);
-
-  /** Signal controlling visibility of the start button. */
-  public hideStart = signal(this.time() !== 0);
 
   /**
    * Called when the timer hits zero.
@@ -130,7 +127,6 @@ export class TimerDialogComponent {
 
     this.isPaused = false;
     this.isRunning = true;
-    this.hideStart.set(true);
 
     if (this.timer) clearInterval(this.timer);
 
@@ -189,7 +185,6 @@ export class TimerDialogComponent {
     this.time.set(0);
     this.isReset = true; // Enable timer buttons again
     this.timerCompleted = false; // Re-enable timer control buttons
-    this.hideStart.set(false);
   }
 
   /**
@@ -204,7 +199,17 @@ export class TimerDialogComponent {
    * Calculates the progress bar percentage as a number (0-100).
    */
   public get progressPercent(): number {
-    const progress: number = (this.time() / this.maxDuration()) * 100;
-    return progress;
+    return (this.time() / this.maxDuration()) * 100;
+  }
+
+  /**
+   * Combined handler to either start, pause, or resume the timer.
+   */
+  public togglePauseOrStart(): void {
+    if (!this.isRunning) {
+      this.startTimer();
+    } else {
+      this.togglePause();
+    }
   }
 }

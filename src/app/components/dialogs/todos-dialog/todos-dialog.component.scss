@@ -33,24 +33,24 @@ new-todo-dialog {
   border-radius: 6px;
 }
 
+.show-archived {
+  background-color: var(--cv-blue);
+  color: white !important;
+}
+
+#show-archived-label {
+  padding-top: 6px;
+}
+
 #show-archived-btn {
-  border: 1px solid var(--cv-blue);
-  height: 36px;
-  font-size: 0.8rem;
+  border: 1px solid var(--cv-lightgrey);
+  background-color: white;
   color: var(--cv-blue);
   transition: all 0.05s ease-in-out;
 }
 
-#show-archived-btn:active {
-  transform: scale(0.95);
-}
-
-#show-archived-btn:hover {
-  background-color: var(--cv-blue);
-  color: white;
-}
-
-.show-archived {
-  background-color: var(--cv-blue);
-  color: white !important;
+#show-archived-btn:checked {
+  fill: var(--cv-blue) !important;
+  background-color: var(--cv-blue) !important;
+  border: 1px solid var(--cv-blue) !important;
 }

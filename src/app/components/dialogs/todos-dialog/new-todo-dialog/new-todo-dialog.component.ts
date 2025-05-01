@@ -1,11 +1,12 @@
 import { Component, signal, WritableSignal } from '@angular/core';
-import { DialogWindowComponent } from '../../../dialog-window/dialog-window.component';
+import { DialogWindowComponent } from '../../../common/dialog-window/dialog-window.component';
 import { FormsModule } from '@angular/forms';
 import { TodoService } from '../../../../services/todo.service';
 import { LauncherService } from '../../../../services/launcher.service';
 import { DialogPurpose } from '../../../../models/enums/dialog-purpose.enum';
 import { TodoStatus } from '../../../../models/enums/todo-status.enum';
 import { CommonModule } from '@angular/common';
+import { CvButtonComponent } from '../../../common/cv-button/cv-button.component';
 
 /**
  * NewTodoDialogComponent provides a UI dialog for creating new todo items.
@@ -15,7 +16,12 @@ import { CommonModule } from '@angular/common';
  */
 @Component({
   selector: 'new-todo-dialog',
-  imports: [DialogWindowComponent, FormsModule, CommonModule],
+  imports: [
+    DialogWindowComponent,
+    FormsModule,
+    CommonModule,
+    CvButtonComponent,
+  ],
   templateUrl: './new-todo-dialog.component.html',
   styleUrl: './new-todo-dialog.component.scss',
 })
@@ -62,7 +68,7 @@ export class NewTodoDialogComponent {
    * Attempts to save the todo by calling the TodoService.
    * Performs basic validation and resets form state on success.
    */
-  public saveTodo(): void {
+  public saveTodo = (): void => {
     try {
       if (this.title() !== '' || this.description() !== '') {
         // Send a request to our notes service to save the todo.
@@ -85,7 +91,7 @@ export class NewTodoDialogComponent {
     } catch (err: any) {
       console.log(`Failed to save new todo`, err.message);
     }
-  }
+  };
 
   /** Clears the form fields to prepare for new entry or after submission. */
   public clearForm(): void {
@@ -113,5 +119,9 @@ export class NewTodoDialogComponent {
     if (!this.hasDueDate()) {
       this.dueDate.set('mm/dd/yyyy');
     }
+  }
+
+  public isValidTodo(): boolean {
+    return this.title() !== '' || this.description() !== '';
   }
 }

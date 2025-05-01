@@ -2,15 +2,26 @@
   <div id="size-wrapper">
     <div class="d-flex flex-row align-items-center" id="header-row">
       <div class="display-6">To Do</div>
-      <div class="flex-fill"></div>
-      <button
-        class="btn btn-outline-dark me-3"
-        id="show-archived-btn"
-        (click)="toggleShowArchived()"
-      >
-        {{ showArchived() ? "Hide archived" : "Show archived" }}
-      </button>
 
+      <!-- Spacer -->
+      <div class="flex-fill"></div>
+
+      <!-- Show archived toggle -->
+
+      <label for="show-archived-btn" id="show-archived-label"
+        >Show archived</label
+      >
+      <input
+        type="checkbox"
+        class="form-check-input fs-4 me-3 ms-2"
+        name="show-archived-btn"
+        id="show-archived-btn"
+        (change)="toggleShowArchived()"
+        [checked]="showArchived()"
+        [attr.aria-checked]="showArchived() ? 'true' : 'false'"
+      />
+
+      <!-- New todo button -->
       <button
         class="btn btn-outline-dark"
         id="new-todo-btn"
