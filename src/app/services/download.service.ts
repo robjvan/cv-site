@@ -88,7 +88,8 @@ export class DownloadService {
         doc.text(formattedDate, 10, doc.internal.pageSize.getHeight() - 10);
 
         // Download the PDF
-        doc.save('Skills_Summary.pdf');
+        // doc.save('Skills_Summary.pdf');
+        doc.output('dataurlnewwindow');
       });
   }
 }
