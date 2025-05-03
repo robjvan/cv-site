@@ -1,0 +1,12 @@
+runtime: python39
+
+handlers:
+  # Serve all static assets (JS, CSS, images, etc.)
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|json|webmanifest))
+    static_files: dist/cv-site/browser/\1
+    upload: dist/cv-site/browser/.*
+
+  # Redirect all other routes (Angular paths) to index.html
+  - url: /.*
+    static_files: dist/cv-site/browser/index.html
+    upload: dist/cv-site/browser/index.html
