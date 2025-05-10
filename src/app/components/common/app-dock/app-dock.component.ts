@@ -166,18 +166,18 @@ export class AppDockComponent implements OnInit {
         class: 'bi bi-check2-square',
         openCheck: data.showTodoApp!,
       },
-      {
-        tooltip: 'Notes',
-        action: () => this.openDialog(DialogPurpose.NOTES),
-        class: 'bi bi-journal-text',
-        openCheck: data.showNotesApp!,
-      },
-      {
-        tooltip: 'STL Viewer',
-        action: () => this.openDialog(DialogPurpose.STLVIEWER),
-        class: 'bi bi-badge-3d',
-        openCheck: data.show3dViewerApp!,
-      },
+      // {
+      //   tooltip: 'Notes',
+      //   action: () => this.openDialog(DialogPurpose.NOTES),
+      //   class: 'bi bi-journal-text',
+      //   openCheck: data.showNotesApp!,
+      // },
+      // {
+      //   tooltip: 'STL Viewer',
+      //   action: () => this.openDialog(DialogPurpose.STLVIEWER),
+      //   class: 'bi bi-badge-3d',
+      //   openCheck: data.show3dViewerApp!,
+      // },
       {
         tooltip: 'Timer',
         action: () => this.openDialog(DialogPurpose.TIMER),
