@@ -3,11 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { IUserLocation } from '../models/user-location.interface';
 
 /**
- * LocationService manages access to the user's geolocation data
- * using the browser's built-in `navigator.geolocation` API.
+ * Manages access to the user's geolocation data using the browser's built-in `navigator.geolocation` API.
  *
- * It exposes reactive streams for both the user's coordinates and
- * permission status, making it easy to consume in components or other services.
+ * This service provides reactive streams for both the user's coordinates and permission status, making it
+ * easy to consume in components or other services. It ensures a smooth and user-friendly experience by handling potential
+ * errors and providing fallback behaviors.
  */
 @Injectable({
   providedIn: 'root',
@@ -40,18 +40,19 @@ export class LocationService {
     } else {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
-          // Permission granted - emit location
+          // If location permission has been granted, emit the user's coordinates and set the locationAllowed state to true.
           this.setLocationAllowed(true);
 
+          // Create a IUserLocation object with the user's latitude and longitude.
           const coords: IUserLocation = {
             lat: position.coords.latitude,
             lon: position.coords.longitude,
           };
-
+          // Emit the coordinates via the location$ subject.  This triggers any subscribers to this stream.
           this.location$.next(coords);
         },
         (err: GeolocationPositionError) => {
-          // Permission denied or error occurred
+          // Handle permission denied or error occurred.
           this.setLocationAllowed(false);
           console.warn(
             'Please allow location permissions to fetch latest weather data!',
@@ -59,9 +60,9 @@ export class LocationService {
           );
         },
         {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 60000,
+          enableHighAccuracy: true, // Use high accuracy geolocation.
+          timeout: 10000, // Timeout after 10 seconds.
+          maximumAge: 60000, // Maximum age of cached position data (60 seconds).
         }
       );
     }
@@ -70,7 +71,7 @@ export class LocationService {
   /**
    * Manually sets the permission state for location usage.
    *
-   * @param value - `true` if user has granted permission, `false` otherwise.
+   * @param {boolean} value - `true` if user has granted permission, `false` otherwise.
    */
   public setLocationAllowed(value: boolean): void {
     this.locationAllowed$.next(value);
