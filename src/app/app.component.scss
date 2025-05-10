@@ -1,0 +1,16 @@
+cupertino-bar,
+richmond-bar {
+  z-index: 100;
+}
+
+router-outlet {
+  z-index: 99;
+}
+
+app-dock {
+  position: absolute;
+  bottom: 16px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}

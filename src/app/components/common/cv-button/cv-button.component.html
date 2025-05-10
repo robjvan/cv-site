@@ -1,0 +1,9 @@
+<button
+  id="cvButton"
+  type="button"
+  (click)="action && action()"
+  [disabled]="disabled()"
+  [ngClass]="{ disabled: disabled() }"
+>
+  {{ label() }}
+</button>

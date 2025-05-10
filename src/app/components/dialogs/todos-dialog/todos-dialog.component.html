@@ -1,0 +1,56 @@
+<dialog-window class="pane" title="To Do" type="todos">
+  <div id="size-wrapper">
+    <div class="d-flex flex-row align-items-center" id="header-row">
+      <div class="display-6">To Do</div>
+
+      <!-- Spacer -->
+      <div class="flex-fill"></div>
+
+      <!-- Show archived toggle -->
+
+      <label for="show-archived-btn" id="show-archived-label"
+        >Show archived</label
+      >
+      <input
+        type="checkbox"
+        class="form-check-input fs-4 me-3 ms-2"
+        name="show-archived-btn"
+        id="show-archived-btn"
+        (change)="toggleShowArchived()"
+        [checked]="showArchived()"
+        [attr.aria-checked]="showArchived() ? 'true' : 'false'"
+      />
+
+      <!-- New todo button -->
+      <button
+        class="btn btn-outline-dark"
+        id="new-todo-btn"
+        (click)="openDialog('newTodo')"
+      >
+        <i class="bi bi-plus fs-2"></i>
+      </button>
+    </div>
+
+    <ng-container *ngIf="todos() as todoList">
+      <div
+        cdkDropList
+        class="todos-viewport"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (todo of todoList; track todo) {
+        <div cdkDrag>
+          <todo-card [todo]="todo"></todo-card>
+        </div>
+        }
+      </div>
+    </ng-container>
+  </div>
+</dialog-window>
+
+@if (getDialogState('showNewTodoDialog')) {
+<new-todo-dialog />
+} @if (getDialogState('showEditTodoDialog')) {
+<edit-todo-dialog />
+} @if (getDialogState('showDeleteTodoDialog')) {
+<delete-todo-dialog />
+}

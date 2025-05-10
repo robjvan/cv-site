@@ -1,0 +1,20 @@
+<div class="card my-1">
+  <div class="card-body">
+    <div class="d-flex flex-row">
+      <div class="card-title fw-bold">{{ note()!.title }}</div>
+      <div class="flex-fill"></div>
+      <button class="blank" aria-label="Edit note button">
+        <i id="edit-btn" class="bi bi-pencil control-btn"></i>
+      </button>
+      <div class="mx-1"></div>
+      <button class="blank" aria-label="Delete note button">
+        <i
+          id="delete-btn"
+          class="bi bi-trash control-btn"
+          (click)="deleteNote()"
+        ></i>
+      </button>
+    </div>
+    <div class="card-text">{{ note()!.description }}</div>
+  </div>
+</div>

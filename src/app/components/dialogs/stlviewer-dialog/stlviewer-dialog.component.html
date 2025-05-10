@@ -1,0 +1,52 @@
+<dialog-window class="pane" title="STL Viewer" type="stlviewer">
+  <p class="text-center">
+    Select a model from the list below.
+    <br />
+    <span class="fst-italic"
+      >Use your mouse to rotate, zoom, and pan the object.</span
+    >
+  </p>
+
+  <!-- Model list -->
+  <p class="text-center fst-italic"></p>
+  <div class="model-thumbnails d-flex flex-wrap justify-content-center">
+    @for(model of modelList; track model.filename) {
+    <img
+      [src]="model.thumb"
+      (click)="selectModel(model.filename)"
+      [class.selected]="model.filename === selectedModel()"
+    />
+    }
+  </div>
+
+  <!-- Model filename -->
+  <!-- @if (selectedModel()) {
+  <p class="text-center text-muted fst-italic text-center mt-2">
+    Selected model: {{ selectedModel()?.replace("stl/", "") }}
+  </p>
+  } -->
+
+  <!-- STL preview area -->
+  <div #productView id="productView" class="mt-4 mx-4"></div>
+
+  <!-- Color picker -->
+  <div class="color-picker d-flex flex-wrap justify-content-center my-3">
+    <div
+      *ngFor="let color of colors"
+      class="color-circle"
+      [style.backgroundColor]="color"
+      (click)="selectedModel() ? selectColor(color.code) : null"
+      [class.selected]="isActiveColor(color)"
+      [class.disabled]="!selectedModel()"
+    ></div>
+  </div>
+
+  <!-- Reset view button -->
+  <div class="d-flex flex-row justify-content-center">
+    <cv-button
+      label="🧹 Reset options"
+      [action]="resetDialog"
+      [class.disabled]="!selectedModel()"
+    ></cv-button>
+  </div>
+</dialog-window>

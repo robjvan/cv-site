@@ -1,0 +1,91 @@
+<dialog-window class="pane" title="Skills" type="skills">
+  <div class="size-wrapper" class="d-flex align-items-center flex-column">
+    <span class="display-6">Skills</span>
+    <p class="mt-3">
+      I bring a broad, practical skill set in
+      <span class="fw-bold">full-stack and mobile development</span>, with a
+      strong foundation in support, diagnostics, and embedded integration.
+    </p>
+    <p>
+      On the <span class="fw-bold">frontend</span>, I work confidently with
+      Flutter, Angular, Bootstrap, and responsive UI frameworks. On the
+      <span class="fw-bold">backend</span>, I’ve built secure REST APIs using
+      NestJS, Node.js, PostgreSQL, and MongoDB, often integrating third-party
+      services like Stripe, OpenAI, and Firebase.
+    </p>
+    <p>
+      I have used Redux (and Thunk) for
+      <span class="fw-bold">state management</span> in both mobile and web
+      contexts. My projects have included a Flutter-based e-commerce app with
+      cloud backend, a barcode/ISBN scanning app using the Google Books API, and
+      a 3D printing service built on microservices.
+    </p>
+    <p>
+      Other skills include Git workflows, 3D modeling, barcode scanning,
+      camera-based input, and cross-platform deployment.
+    </p>
+    <p>I’m equally comfortable in Windows, macOS, and Linux environments.</p>
+    <p>
+      I’m always eager to learn new technologies and frameworks, and I’m
+      currently exploring the world of AI and machine learning.
+    </p>
+
+    <!-- Download Summary button -->
+    <cv-button
+      label="💾 Download Skills Summary"
+      [action]="printSkills"
+      class="mb-3"
+    ></cv-button>
+
+    <!-- Tab controller -->
+    <mat-tab-group (selectedTabChange)="onTabChange($event)" class="w-100">
+      <!-- Skills tab -->
+      <mat-tab label="Skills">
+        <div class="mx-1 mt-2">
+          <canvasjs-chart
+            *ngIf="chartVisible['skills']"
+            [options]="getChartOptions('skills')"
+            class=""
+            id="skills-chart"
+          ></canvasjs-chart>
+        </div>
+      </mat-tab>
+
+      <!-- Languages & Frameworks tab -->
+      <mat-tab label="Languages & Frameworks">
+        <div class="row h-stack gap-3 mx-1 mt-3">
+          <canvasjs-chart
+            *ngIf="chartVisible['languages']"
+            [options]="getChartOptions('languages')"
+            class="col"
+            id="languages-chart"
+          ></canvasjs-chart>
+          <canvasjs-chart
+            *ngIf="chartVisible['frameworks']"
+            [options]="getChartOptions('frameworks')"
+            class="col"
+            id="frameworks-chart"
+          ></canvasjs-chart>
+        </div>
+      </mat-tab>
+
+      <!-- Cloud Platforms & OS Proficiency tab -->
+      <mat-tab label="Cloud & OS">
+        <div class="row h-stack gap-3 mx-1 mt-3">
+          <canvasjs-chart
+            *ngIf="chartVisible['cloudPlatforms']"
+            [options]="getChartOptions('cloudPlatforms')"
+            class="col"
+            id="cloudPlatforms-chart"
+          ></canvasjs-chart>
+          <canvasjs-chart
+            *ngIf="chartVisible['operatingSystems']"
+            [options]="getChartOptions('operatingSystems')"
+            class="col"
+            id="operatingSystems-chart"
+          ></canvasjs-chart>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</dialog-window>

@@ -1,0 +1,88 @@
+<section
+  id="bg"
+  class="h-100 w-100 d-flex flex-column justify-content-center align-items-center"
+>
+  <!-- App dialogs -->
+  @if (getDialogState('showAboutAppDialog')) {
+  <!-- About app dialog -->
+  <about-app-dialog
+    (mousedown)="bringToFront('about')"
+    [style.z-index]="getZIndex('about')"
+  ></about-app-dialog>
+  } @if (getDialogState('showHelpDialog')) {
+  <!-- Help dialog -->
+  <help-dialog
+    (mousedown)="bringToFront('help')"
+    [style.z-index]="getZIndex('help')"
+  ></help-dialog>
+  }@if (getDialogState('showSettingsDialog')) {
+  <!-- Settings dialog -->
+  <settings-dialog
+    (mousedown)="bringToFront('settings')"
+    [style.z-index]="getZIndex('settings')"
+  ></settings-dialog>
+  } @if (getDialogState('showSearchApp')) {
+  <!-- Multi Search dialog -->
+  <search-dialog
+    (mousedown)="bringToFront('search')"
+    [style.z-index]="getZIndex('search')"
+  ></search-dialog>
+  } @if (getDialogState('showTodoApp')) {
+  <!-- Todos app -->
+  <todos-dialog
+    (mousedown)="bringToFront('todo')"
+    [style.z-index]="getZIndex('todo')"
+  ></todos-dialog>
+  } @if (getDialogState('showNotesApp')) {
+  <!-- Notes app -->
+  <notes-dialog
+    (mousedown)="bringToFront('notes')"
+    [style.z-index]="getZIndex('notes')"
+  ></notes-dialog>
+  } @if (getDialogState('show3dViewerApp')) {
+  <!-- STL Viewer app -->
+  <stlviewer-dialog
+    (mousedown)="bringToFront('stlviewer')"
+    [style.z-index]="getZIndex('stlviewer')"
+  ></stlviewer-dialog>
+  } @if (getDialogState('showWeatherApp')) {
+  <!-- Weather app -->
+  <weather-dialog
+    (mousedown)="bringToFront('weather')"
+    [style.z-index]="getZIndex('weather')"
+  ></weather-dialog>
+  }
+
+  <!-- Personal info dialogs -->
+  @if (getDialogState('showAboutMeDialog')) {
+  <!-- About me dialog -->
+  <about-me-dialog
+    (mousedown)="bringToFront('aboutMe')"
+    [style.z-index]="getZIndex('aboutMe')"
+  ></about-me-dialog>
+  } @if (getDialogState('showSkillsDialog')) {
+  <!-- Skill dialog -->
+  <skills-dialog
+    (mousedown)="bringToFront('skills')"
+    [style.z-index]="getZIndex('skills')"
+  ></skills-dialog>
+  } @if (getDialogState('showProjectsDialog')) {
+  <!-- Projects dialog -->
+  <projects-dialog
+    (mousedown)="bringToFront('projects')"
+    [style.z-index]="getZIndex('projects')"
+  ></projects-dialog>
+  } @if (getDialogState('showEducationDialog')) {
+  <!-- Education dialog -->
+  <education-dialog
+    (mousedown)="bringToFront('education')"
+    [style.z-index]="getZIndex('education')"
+  ></education-dialog>
+  } @if (getDialogState('showTimerDialog')) {
+  <!-- Timer app dialog -->
+  <timer-dialog
+    (mousedown)="bringToFront('timer')"
+    [style.z-index]="getZIndex('timer')"
+  ></timer-dialog>
+  }
+</section>

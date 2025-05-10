@@ -1,0 +1,122 @@
+<dialog-window class="pane" title="Timer" type="timer">
+  <div id="size-wrapper">
+    <!-- Timer button row -->
+    <div class="d-flex flex-row">
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(0)"
+        [ngClass]="{ active: activeTimer(0) }"
+      >
+        30 sec
+      </button>
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(1)"
+        [ngClass]="{ active: activeTimer(1) }"
+      >
+        1 min
+      </button>
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(2)"
+        [ngClass]="{ active: activeTimer(2) }"
+      >
+        5 min
+      </button>
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(3)"
+        [ngClass]="{ active: activeTimer(3) }"
+      >
+        15 min
+      </button>
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(4)"
+        [ngClass]="{ active: activeTimer(4) }"
+      >
+        30 min
+      </button>
+      <div class="flex-fill"></div>
+      <button
+        class="btn timer-btn"
+        [disabled]="isRunning || !isReset"
+        (click)="selectTimer(5)"
+        [ngClass]="{ active: activeTimer(5) }"
+      >
+        60 min
+      </button>
+      <div class="flex-fill"></div>
+    </div>
+
+    @if (!isReset) {
+    <!-- Progress Spinner -->
+    <div class="d-flex justify-content-center" id="spinner-wrapper">
+      <mat-progress-spinner
+        [value]="progressPercent"
+        diameter="300"
+        id="spinner"
+      >
+      </mat-progress-spinner>
+
+      <!-- Numeric countdown timer -->
+      <div class="position-absolute" id="timer-text-wrapper">
+        <span class="my-3 display-6 fw-bold" id="timer-text">{{
+          timeRemaining
+        }}</span>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-center mt-4">
+      <!-- Start/pause/resume button -->
+      <button
+        class="btn control-btn"
+        (click)="togglePauseOrStart()"
+        [disabled]="timerCompleted || isReset"
+      >
+        {{ isPaused ? "Resume" : isRunning ? "Pause" : "Start" }}
+      </button>
+
+      <!-- Reset button -->
+      <button
+        class="btn control-btn mt-2"
+        (click)="resetTimer()"
+        [ngClass]="{ active: timerCompleted }"
+        [disabled]="isReset || isRunning"
+      >
+        Reset
+      </button>
+    </div>
+    }
+  </div>
+</dialog-window>
+
+<!-- Toast that shows when the timer is complete -->
+<div class="toast-container position-fixed top-0 p-3" *ngIf="showToast">
+  <div class="toast show align-items-center text-white border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">⏰ Timer Complete!</div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="showToast = false"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<!-- Audio clip that plays when the timer is complete -->
+<audio #alarmAudio>
+  <source src="sounds/desk-bell.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>

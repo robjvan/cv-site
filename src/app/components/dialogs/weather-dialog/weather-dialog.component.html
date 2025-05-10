@@ -1,0 +1,46 @@
+<dialog-window class="pane" title="Weather" type="weather">
+  <div id="size-wrapper" class="d-flex flex-column align-items-center">
+    @if (!locationAllowed()) {
+    <span>Allow location permissions for weather data!</span>
+    } @else if (forecastData() === undefined) {
+    <h5 class="text-center">Loading weather data...</h5>
+    } @else {
+
+    <h2 class="text-center">Current Conditions</h2>
+
+    <!-- Current conditions icon -->
+    <img
+      src="{{ forecastData()?.current?.condition?.icon }}"
+      id="conditions-icon"
+    />
+
+    <!-- Current conditions text -->
+    <p class="text-center fw-bold" id="current-conditions">
+      Currently {{ forecastData()?.current?.condition?.text }}
+    </p>
+
+    <!-- Current temperature -->
+    <p class="text-center" id="current-temperature">
+      It is {{ forecastData()?.current?.temp_c | number : "1.0-0" }}c, but feels
+      like {{ forecastData()?.current?.feelslike_c | number : "1.0-0" }}c
+    </p>
+
+    <!-- Current wind conditions -->
+    <p class="text-center" id="current-wind">
+      The wind is blowing
+      {{ forecastData()?.current?.wind_dir }} at
+      {{ forecastData()?.current?.wind_kph | number : "1.0-0" }} kph
+    </p>
+
+    <!-- Refresh button -->
+    <cv-button label="🔃 Refresh" [action]="refreshWeather"></cv-button>
+    <!-- <button
+      type="button"
+      class="btn btn-outline-dark center"
+      (click)="refreshWeather()"
+    >
+      Refresh
+    </button> -->
+    }
+  </div>
+</dialog-window>

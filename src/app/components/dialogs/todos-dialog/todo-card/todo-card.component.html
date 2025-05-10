@@ -1,0 +1,111 @@
+<div class="card my-1" [ngClass]="{ 'bg-faded': archived }">
+  <div class="card-body">
+    <div class="d-flex flex-row align-items-start">
+      <!-- Title -->
+      <div class="card-title fw-bold" id="todo-title">
+        {{ todo()!.title }}
+      </div>
+
+      <!-- Spacer -->
+      <div class="flex-fill"></div>
+
+      @if (status !== undefined) {
+      <!-- Status badge/selector -->
+      <div class="dropdown ms-3">
+        <button
+          type="button"
+          class="btn dropdown-toggle"
+          data-bs-toggle="dropdown"
+          [disabled]="archived"
+        >
+          <div class="card-text">
+            <span class="badge" [ngClass]="getColorClass">
+              {{ status }}
+            </span>
+          </div>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" class="dropdown-item" (click)="updateStatus('new')">
+              <span class="badge new"> New </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="dropdown-item"
+              (click)="updateStatus('inprogress')"
+            >
+              <span class="badge inprogress"> In Progress </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="dropdown-item"
+              (click)="updateStatus('cancelled')"
+            >
+              <span class="badge cancelled"> Cancelled </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="dropdown-item" (click)="updateStatus('onhold')">
+              <span class="badge onhold"> On Hold </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="dropdown-item"
+              (click)="updateStatus('complete')"
+            >
+              <span class="badge complete"> Complete </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      }
+
+      <!-- Edit button -->
+      <button
+        class="blank mx-2"
+        aria-label="Edit todo button"
+        title="Edit todo"
+      >
+        <i id="edit-btn" class="bi bi-pencil control-btn disabled"></i>
+      </button>
+
+      <!-- Archive button -->
+      <button
+        class="blank me-2"
+        aria-label="Edit todo button"
+        [title]="archived ? 'Unarchive todo' : 'Archive todo'"
+      >
+        <i
+          id="archive-btn"
+          class="bi bi-archive control-btn"
+          [ngClass]="{ archived: archived }"
+          (click)="toggleArchivedStatus()"
+        ></i>
+      </button>
+
+      <!-- Delete button -->
+      <button class="blank" aria-label="Delete todo button" title="Delete todo">
+        <i
+          id="delete-btn"
+          class="bi bi-trash control-btn"
+          (click)="deleteTodo()"
+          [ngClass]="{ disabled: archived }"
+        ></i>
+      </button>
+    </div>
+
+    <!-- Description -->
+    <div class="card-text">{{ todo()!.description }}</div>
+
+    <!-- Due Date -->
+    @if (dueDate) {
+    <div class="card-text fst-italic text-muted">Due {{ dueDate }}</div>
+    }
+  </div>
+</div>

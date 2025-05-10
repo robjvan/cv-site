@@ -1,0 +1,103 @@
+<dialog-window class="pane" title="Settings" type="settings">
+  <div id="size-wrapper"></div>
+  <h1 class="display-6">Site Settings</h1>
+
+  <!-- Show seconds button row -->
+  <div class="d-flex flex-row">
+    <div class="align-content-center">
+      <span class="control-label">Show seconds in clock</span>
+    </div>
+
+    <div class="flex-fill"></div>
+
+    <!-- Toggle seconds button  -->
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      id="secondsBtn"
+      (click)="toggleSeconds()"
+      [ngClass]="{ active: showSeconds() }"
+    >
+      {{ secondsBtnLabel }}
+    </button>
+  </div>
+
+  <hr class="mx-3" />
+
+  <!-- Show weather in top bar row -->
+  <div class="d-flex flex-row mt-2">
+    <div class="align-content-center">
+      <span class="control-label">Show weather in top bar</span>
+    </div>
+
+    <div class="flex-fill"></div>
+
+    <!-- Toggle weather in top bar button  -->
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      id="showWeatherBtn"
+      (click)="toggleWeather()"
+      [ngClass]="{ active: showWeather() }"
+    >
+      {{ showWeatherBtnLabel }}
+    </button>
+  </div>
+
+  <!-- Enable weather globally -->
+  <!-- <div class="d-flex flex-row mt-2">
+    <div class="align-content-center">
+      <span>Enable weather service</span>
+    </div>
+
+    <div class="flex-fill"></div> -->
+
+  <!-- Toggle weather in top bar button  -->
+  <!-- <button
+      type="button"
+      class="btn btn-outline-dark"
+      id="toggleWeatherBtn"
+      (click)="toggleWeatherService()"
+    >
+      {{ enableWeatherBtnLabel }}
+    </button>
+  </div> -->
+
+  <!-- Show dynamic background row -->
+  <!-- <div class="display-flex flex-row row">
+    <div class="col align-content-center">
+      <span>Show dynamic background</span>
+    </div> -->
+
+  <!-- Toggle dynamic background button  -->
+  <!-- <div class="col">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="dynamnicBgBtn"
+        (click)="toggleDynamicBg()"
+      >
+        {{ dynamicBgBtnLabel }}
+      </button>
+    </div> -->
+  <!-- </div> -->
+
+  <!-- Show toggle dark mode row -->
+  <!-- <div class="display-flex flex-row row">
+    <div class="col align-content-center">
+      <span>Use dark mode</span>
+    </div> -->
+
+  <!-- Toggle dark mode button  -->
+  <!-- <div class="col">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="darkModeBtn"
+        (click)="toggleDarkMode()"
+      >
+        {{ darkModeBtnLabel }}
+      </button>
+    </div>
+  </div> -->
+</dialog-window>

@@ -1,0 +1,23 @@
+.blank {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.control-btn {
+  color: var(--cv-grey);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  padding: 8px;
+  transition: all 0.1s ease-in-out;
+}
+
+#edit-btn:hover {
+  color: var(--cv-blue);
+  border: 1px solid var(--cv-blue);
+}
+
+#delete-btn:hover {
+  color: var(--cv-red);
+  border: 1px solid var(--cv-red);
+}

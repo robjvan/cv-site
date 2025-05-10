@@ -1,0 +1,86 @@
+<dialog-window class="pane" title="Education" type="education">
+  <!-- Outer container for the size wrapper -->
+  <div id="size-wrapper">
+    <!-- Flex container for aligning items vertically and horizontally -->
+    <div class="d-flex flex-row align-items-center" id="header-row">
+      <!-- Paragraph explaining the purpose of the timeline -->
+      <p>
+        A visual timeline highlighting my academic achievements and
+        certifications, with interactive event markers providing details on each
+        major milestone in my development journey.
+      </p>
+    </div>
+
+    <!-- Container for the timeline itself -->
+    <div class="timeline center">
+      <ul>
+        @for(event of educationEvents; track event.title) {
+
+        <li>
+          <span>{{ event.date }}</span>
+          <div class="content">
+            <h3>{{ event.title }}</h3>
+            <p id="description">{{ event.description }}</p>
+          </div>
+        </li>
+        }
+        <!-- <li>
+          <span>3rd January 2020</span>
+          <div class="content">
+            <h3>What Is Lorem Ipsum?</h3>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span>21st Jun 2019</span>
+          <div class="content">
+            <h3>What Is Lorem Ipsum?</h3>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span>15th April 2018</span>
+          <div class="content">
+            <h3>What Is Lorem Ipsum?</h3>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span>22nd Mars 2017</span>
+          <div class="content">
+            <h3>What Is Lorem Ipsum?</h3>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard.
+            </p>
+          </div>
+        </li> -->
+      </ul>
+      <!-- Loop through each education event to generate timeline events -->
+      <!-- <div class="event" *ngFor="let event of educationEvents; let i = index"> -->
+      <!-- Even-indexed events (even numbers) -->
+      <!-- <div *ngIf="i % 2 === 0" class="date top">{{ event.date }}</div>
+        <div *ngIf="i % 2 !== 0" class="desc top">{{ event.title }}</div> -->
+
+      <!-- Center dot to connect events -->
+      <!-- <div class="dot"></div> -->
+
+      <!-- Odd-indexed events (odd numbers) -->
+      <!-- <div *ngIf="i % 2 === 0" class="desc bottom">
+          {{ event.title }}
+        </div> -->
+      <!-- <div *ngIf="i % 2 !== 0" class="date bottom">{{ event.date }}</div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</dialog-window>
