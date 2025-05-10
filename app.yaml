@@ -3,11 +3,23 @@ runtime: python39
 handlers:
   # Serve the resume and other static files from /docs
   #! The handler for /docs must come first, or it will get overridden by the wildcard rule /.*/.
-  - url: /docs
-    static_dir: public/docs
+  # - url: /docs
+  #   static_dir: public/docs
+
+  # # Serve files from public/sounds at /sounds/*
+  # - url: /sounds
+  #   static_dir: public/sounds
+
+  # # Serve files from public/images at /images/*
+  # - url: /images
+  #   static_dir: public/images
+
+  # # Serve files from public/stl at /stl/*
+  # - url: /stl
+  #   static_dir: public/stl
 
   # Serve all static assets (JS, CSS, images, etc.)
-  - url: /(.*\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|json|webmanifest))
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|pdf|mp3|stl|eot|json|webmanifest))
     static_files: dist/cv-site/browser/\1
     upload: dist/cv-site/browser/.*
 
