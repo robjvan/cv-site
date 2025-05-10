@@ -24,7 +24,7 @@ export class SearchService {
    *
    * @param provider - New provider to use (e.g., GOOGLE, YOUTUBE, etc.).
    */
-  public setProvider(provider: SearchProvider) {
+  public setProvider(provider: SearchProvider): void {
     this.provider.next(provider);
   }
 
@@ -36,14 +36,14 @@ export class SearchService {
     SearchProvider,
     (query: string) => string
   > = {
-    [SearchProvider.GOOGLE]: (query) =>
+    [SearchProvider.GOOGLE]: (query: string) =>
       `https://www.google.com/search?q=${query}`,
-    [SearchProvider.AMAZON]: (query) => `https://www.amazon.ca/s?k=${query}`,
-    [SearchProvider.STACK_OVERFLOW]: (query) =>
+    [SearchProvider.AMAZON]: (query: string) => `https://www.amazon.ca/s?k=${query}`,
+    [SearchProvider.STACK_OVERFLOW]: (query: string) =>
       `https://stackoverflow.com/search?q${query}`,
-    [SearchProvider.YOUTUBE]: (query) =>
+    [SearchProvider.YOUTUBE]: (query: string) =>
       `https://www.youtube.com/results?search_query=${query}`,
-    [SearchProvider.WIKIPEDIA]: (query) =>
+    [SearchProvider.WIKIPEDIA]: (query: string) =>
       `https://en.wikipedia.org/wiki/${query}`,
   };
 
@@ -58,7 +58,7 @@ export class SearchService {
     const url = this.searchUrlMap[provider];
 
     if (url) {
-      const encodedQuery = encodeURIComponent(query);
+      const encodedQuery: string = encodeURIComponent(query);
       window.open(url(encodedQuery), '_blank');
     }
   }
