@@ -8,10 +8,8 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { apiUrl, apiKey } from '../keys';
 import { LocationService } from './location.service';
 import { IUserLocation } from '../models/user-location.interface';
-
 import { HttpClient } from '@angular/common/http';
 import { IForecastData } from '../models/weather-models/forecast-data.interface';
 
@@ -67,13 +65,23 @@ export class WeatherService {
               filter((loc): loc is IUserLocation => !!loc), // Type guard ensures location is defined
               takeUntil(this.destroy$),
               switchMap((location: IUserLocation) => {
-                const url: string = `${apiUrl}${apiKey}&q=${location.lat},${location.lon}&days=5&aqi=yes&alerts=yes`;
-                return this.http.post<IForecastData>(url, null).pipe(
-                  catchError((err: any) => {
-                    console.error('[WeatherService] HTTP error:', err.message);
-                    return of(undefined); // Continue stream with a fallback value
-                  })
-                );
+                return this.http
+                  .post<IForecastData>(
+                    'https://weather-api-458802.nn.r.appspot.com',
+                    {
+                      lat: location.lat,
+                      lon: location.lon,
+                    }
+                  )
+                  .pipe(
+                    catchError((err: any) => {
+                      console.error(
+                        '[WeatherService] HTTP error:',
+                        err.message
+                      );
+                      return of(undefined); // Continue stream with a fallback value
+                    })
+                  );
               })
             )
           )
