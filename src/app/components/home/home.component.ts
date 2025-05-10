@@ -25,6 +25,8 @@ import { filter, Subject, takeUntil } from 'rxjs';
 import { LocationService } from '../../services/location.service';
 import { WeatherService } from '../../services/weather.service';
 import { TimerDialogComponent } from '../dialogs/timer-dialog/timer-dialog.component';
+import { Platform } from '@angular/cdk/platform';
+import { MobileUiComponent } from '../mobile-ui/mobile-ui.component';
 
 declare var VANTA: any;
 
@@ -45,6 +47,7 @@ declare var VANTA: any;
     AboutAppDialogComponent,
     WeatherDialogComponent,
     TimerDialogComponent,
+    MobileUiComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -61,7 +64,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private readonly launcherService: LauncherService,
     private readonly locationService: LocationService,
     private readonly weatherService: WeatherService,
-    private readonly settingsService: SettingsService
+    private readonly settingsService: SettingsService,
+    private platform: Platform
   ) {}
 
   /** Stores the current dark mode state as a writable signal. */
@@ -69,7 +73,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   openApps = signal<IOpenApps | undefined>(undefined);
 
-  highestZIndex = 100;
+  highestZIndex: number = 100;
+
+  isDesktop: boolean = false;
+
+  private isMobile(): boolean {
+    return this.platform.ANDROID || this.platform.IOS;
+  }
 
   // Structure to store z-index values by window type
   private windowZIndices = new Map<string, number>([
@@ -93,47 +103,51 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Subscribes to the theme service to update background styles dynamically.
    */
   ngOnInit(): void {
-    this.openApps.set(this.launcherService.initialAppState);
+    this.isDesktop = this.platform.isBrowser && !this.isMobile();
 
-    this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (openApps: IOpenApps) => this.openApps.set(openApps),
-      error: (err: any) => console.log(err.message),
-    });
+    if (this.isDesktop) {
+      this.openApps.set(this.launcherService.initialAppState);
 
-    // Handle user location
-    this.locationService.location$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((val) => val === undefined)
-      )
-      .subscribe(() => {
-        this.locationService.processUserLocation();
+      this.launcherService.openApps$.pipe(takeUntil(this.destroy$)).subscribe({
+        next: (openApps: IOpenApps) => this.openApps.set(openApps),
+        error: (err: any) => console.log(err.message),
       });
 
-    this.settingsService.enableWeather$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (enableWeather: boolean) => {
-          if (enableWeather) {
-            // Handle weather data
-            this.weatherService.forecastData$
-              .pipe(takeUntil(this.destroy$))
-              .subscribe({
-                next: (data) => {
-                  if (!data) {
-                    this.weatherService.fetchWeatherData();
-                  }
-                },
-                error: (err) =>
-                  console.error(
-                    '[WeatherDialogComponent] Forecast error:',
-                    err.message
-                  ),
-              });
-          }
-        },
-        error: (err) => console.log(err.message),
-      });
+      // Handle user location
+      this.locationService.location$
+        .pipe(
+          takeUntil(this.destroy$),
+          filter((val) => val === undefined)
+        )
+        .subscribe(() => {
+          this.locationService.processUserLocation();
+        });
+
+      this.settingsService.enableWeather$
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (enableWeather: boolean) => {
+            if (enableWeather) {
+              // Handle weather data
+              this.weatherService.forecastData$
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                  next: (data) => {
+                    if (!data) {
+                      this.weatherService.fetchWeatherData();
+                    }
+                  },
+                  error: (err) =>
+                    console.error(
+                      '[WeatherDialogComponent] Forecast error:',
+                      err.message
+                    ),
+                });
+            }
+          },
+          error: (err) => console.log(err.message),
+        });
+    }
   }
 
   /** Lifecycle hook that runs after the view has been initialized.
