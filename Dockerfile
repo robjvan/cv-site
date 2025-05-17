@@ -30,6 +30,6 @@ COPY . .
 RUN npm run build -- --configuration production
 
 # Stage 2: Serve with default NGINX
-FROM nginx:alpine
-COPY --from=builder /app/dist/cv-site /usr/share/nginx/html
-EXPOSE 80
+# FROM nginx:alpine
+# COPY --from=builder /app/dist/cv-site /usr/share/nginx/html
+# EXPOSE 80
