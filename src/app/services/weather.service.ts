@@ -67,7 +67,8 @@ export class WeatherService {
               switchMap((location: IUserLocation) => {
                 return this.http
                   .post<IForecastData>(
-                    'https://weather-api-458802.nn.r.appspot.com',
+                    // 'https://weather-api-458802.nn.r.appspot.com',
+                    'https://weather-api.robjvan.ca',
                     {
                       lat: location.lat,
                       lon: location.lon,
