@@ -1,7 +1,7 @@
-version: "1.0"
+# version: "1.0"
 
-name: cv-site
-type: docker
+# name: cv-site
+# type: docker
 
-docker:
-  dockerfile: Dockerfile
+# docker:
+#   dockerfile: Dockerfile
