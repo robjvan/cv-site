@@ -22,14 +22,28 @@
 # EXPOSE 80
 
 # Stage 1: Build Angular app
-FROM node:20-alpine as builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build -- --configuration production
+# FROM node:20-alpine as builder
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm ci
+# COPY . .
+# RUN npm run build -- --configuration production
 
 # Stage 2: Serve with default NGINX
 # FROM nginx:alpine
 # COPY --from=builder /app/dist/cv-site /usr/share/nginx/html
 # EXPOSE 80
+
+
+# Stage 1: Build Angular app
+FROM node:20-alpine as builder
+WORKDIR /usr/src/app
+# COPY package*.json ./
+# RUN npm ci
+COPY . /usr/src/app
+
+RUN npm install -g @angular/cli
+
+RUN npm install
+
+CMD ["ng", "serve", "--host", "0.0.0.0"]
