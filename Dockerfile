@@ -11,7 +11,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy Angular build output
-COPY --from=builder /dist/cv-site/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/cv-site /usr/share/nginx/html
 
 # Copy your static public assets
 COPY public/docs /usr/share/nginx/html/docs
