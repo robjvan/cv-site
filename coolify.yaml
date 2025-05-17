@@ -6,4 +6,4 @@ type: docker
 docker:
   dockerfile: Dockerfile
   ports:
-    - 80
+    - 8081:80
